@@ -1,8 +1,8 @@
 # Proyect-Beer
 Proyecto de programación II 
-##Objeto
+## Objeto
 Cereveza-Beer
-##Atributos 
+## Atributos 
 - Numero serial de la cerveza - serialNumber
 - Marca - brand
 - Grado alcochol por volumen - ABV
