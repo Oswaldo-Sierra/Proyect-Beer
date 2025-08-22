@@ -1,1 +1,4 @@
-null;Corona;Large;4.5%;Rubia;mexico
+SN-20250813-0001;Corona;Large;4.5%;Rubia;Mexico
+SN-20250813-0002;Corona;Large;4.8%;Rubia;Mexico
+SN-20250813-0003;Corona;Large;4.5%;Rubia;Mexico
+SN-20250813-0004;Andina;Cerverza de trigo;3.0%;Rubia;Colombia

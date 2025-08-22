@@ -1,0 +1,34 @@
+[
+  {
+    "serialNumber": "SN-20250813-0001",
+    "brand": "Corona",
+    "type": "Large",
+    "ABV": "4.5%",
+    "IBU": "Rubia",
+    "origin": "Mexico"
+  },
+  {
+    "serialNumber": "SN-20250813-0002",
+    "brand": "Corona",
+    "type": "Large",
+    "ABV": "4.8%",
+    "IBU": "Rubia",
+    "origin": "Mexico"
+  },
+  {
+    "serialNumber": "SN-20250813-0003",
+    "brand": "Corona",
+    "type": "Large",
+    "ABV": "4.5%",
+    "IBU": "Rubia",
+    "origin": "Mexico"
+  },
+  {
+    "serialNumber": "SN-20250813-0004",
+    "brand": "Andina",
+    "type": "Cerverza de trigo",
+    "ABV": "3.0%",
+    "IBU": "Rubia",
+    "origin": "Colombia"
+  }
+]

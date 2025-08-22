@@ -1,0 +1,39 @@
+<XML version= "1.0" encoding ="UTF-8"> 
+
+<Beer>
+	<SerialNumbre>SN-20250813-0001</SerialNumbre>
+	<Brand>Corona</Brand>
+	<Type>Large</Type>
+	<ABV>4.5%</ABV>
+	<IBU>Rubia</IBU>
+	<Origin>Mexico</Origin> 
+
+</Beer>
+<Beer>
+	<SerialNumbre>SN-20250813-0002</SerialNumbre>
+	<Brand>Corona</Brand>
+	<Type>Large</Type>
+	<ABV>4.8%</ABV>
+	<IBU>Rubia</IBU>
+	<Origin>Mexico</Origin> 
+
+</Beer>
+<Beer>
+	<SerialNumbre>SN-20250813-0003</SerialNumbre>
+	<Brand>Corona</Brand>
+	<Type>Large</Type>
+	<ABV>4.5%</ABV>
+	<IBU>Rubia</IBU>
+	<Origin>Mexico</Origin> 
+
+</Beer>
+<Beer>
+	<SerialNumbre>SN-20250813-0004</SerialNumbre>
+	<Brand>Andina</Brand>
+	<Type>Cerverza de trigo</Type>
+	<ABV>3.0%</ABV>
+	<IBU>Rubia</IBU>
+	<Origin>Colombia</Origin> 
+
+</Beer>
+</XML>

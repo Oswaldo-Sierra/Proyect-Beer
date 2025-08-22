@@ -1,5 +1,7 @@
 package com.edu.uptc.handlingBeer.model;
 
+import java.io.Serializable;
+
 /**
  * Clase del modelo que representa una cerveza con sus características
  * principales como marca, tipo, grado de alcohol, numero de serie, amargor y origen.
@@ -8,8 +10,11 @@ package com.edu.uptc.handlingBeer.model;
  * 
  * @author Oswaldo Sierra
  */
-public class Beer {
+public class Beer implements Serializable{
 	
+	
+	private static final long serialVersionUID = 7758888672641333914L;
+
 	 /** El numero de serie unico en la botella o lata de la cerveza. */
     private String serialNumber;
 
