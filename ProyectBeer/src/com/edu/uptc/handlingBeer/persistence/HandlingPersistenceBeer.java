@@ -1,32 +1,36 @@
-package com.edu.uptc.handlingBeer.Persistence;
+package com.edu.uptc.handlingBeer.persistence;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Arrays; 
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
-
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.edu.uptc.handlingBeer.Constants.CommonConstants;
-import com.edu.uptc.handlingBeer.Enums.ETypeFile;
-import com.edu.uptc.handlingBeer.Interface.*;
+import com.edu.uptc.handlingBeer.constants.CommonConstants;
+import com.edu.uptc.handlingBeer.enums.ETypeFile;
+import com.edu.uptc.handlingBeer.interfaces.*;
 import com.edu.uptc.handlingBeer.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
+ 
 public class HandlingPersistenceBeer extends FilePlain 
 	implements IActionsFile  {
 	
@@ -36,6 +40,7 @@ public class HandlingPersistenceBeer extends FilePlain
 		listBeer = new ArrayList<>();
 	}
 	
+	/** Metodo que se encarga de añadir nuevos objetos(En este caso de tipo beer). */
 	public Boolean addBeers(Beer beer) {
 		if(Objects.isNull(this.findBeerBySerialNumber(beer.getSerialNumber()))) {
 			this.listBeer.add(beer);
@@ -44,6 +49,7 @@ public class HandlingPersistenceBeer extends FilePlain
 		return Boolean.FALSE;
 	}
 	
+	/** Metodo que se encarga de verficar que no existan dos tipos de objetos iguales(Por medio de un atributo en este caso). */
 	public Beer findBeerBySerialNumber(String serialNumber) {
 		for(Beer beer: this.listBeer) {
 			if(beer.getSerialNumber().contentEquals(serialNumber)) {
@@ -53,6 +59,8 @@ public class HandlingPersistenceBeer extends FilePlain
 		return null;
 	}
 	
+	
+	/** Metodo que se encarga de volcar la informacion registrada por el usuario dependiendo del tipo de archivo plano. */
 	@Override
 	public void dumpFile(ETypeFile eTypeFile) {
 		if(ETypeFile.FILE_PLAIN.equals(eTypeFile)) {
@@ -73,10 +81,14 @@ public class HandlingPersistenceBeer extends FilePlain
 			dumpFileXML();
 			
 		}
+		if (ETypeFile.SER.equals(eTypeFile)) {
+			dumpFileSerializate();
+		}
 	}
 	
 	
 
+	/** Metodo encargado de cargar la informacion del archivo plano despues de que se halla cerrado el programa y vuelvo a abrir. */
 	@Override 
 	public void loadFile(ETypeFile eTypeFile) {
 		if(ETypeFile.FILE_PLAIN.equals(eTypeFile)) {
@@ -86,19 +98,26 @@ public class HandlingPersistenceBeer extends FilePlain
 		if (ETypeFile.CSV.equals(eTypeFile)) {
 			String nameFileCSV = config.getNameFileCSV();
 			this.loadFilePlain(nameFileCSV);
-			
 		}
 		if (ETypeFile.JSON.equals(eTypeFile)) {
 		    loadFileJSON();
-		}if (ETypeFile.XML.equals(eTypeFile)) {
+		    
+		}
+		if (ETypeFile.XML.equals(eTypeFile)) {
 			loadFileXML();
+			
+		}
+		if (ETypeFile.SER.equals(eTypeFile)) {
+			loadFileSerializate();
 		}
 
 		
 	}
 	
 
-	/*private void dumpFileJSON() {
+	
+/*
+	private void dumpFileJSON() {
 		String rutaArchivo = config.getPathFile()
 				.concat(config.getNameFileJSON());
 		StringBuilder json = null;
@@ -132,8 +151,85 @@ public class HandlingPersistenceBeer extends FilePlain
 	private String escape(String value) {
 	    if (value == null) return "";
 	    return value.replace("\\", "\\\\").replace("\"", "\\\"");
-	}*/
+	    }
+	    
 	
+	    
+	    private void loadFileJSON() {
+		List<String> contentInLine = this.reader(
+				config.getPathFile().concat(config.getNameFileJSON()))
+				.stream().filter(line -> !line.equals("[") && !line.equals("]") &&
+						!line.equals(CommonConstants.BREAK_LINE) &&
+						!line.trim().isEmpty() && !line.trim().isBlank())
+				.collect(Collectors.toList());   
+		for(String line: contentInLine) {
+			line = line.replace("{", "").replace("},", "").replace("}", "");
+			StringTokenizer tokens = new StringTokenizer(line, ",");
+			
+			while(tokens.hasMoreElements()){
+				String serialNumber = this.escapeValue(tokens.nextToken().split(":")[1]);
+				String brand = this.escapeValue(tokens.nextToken().split(":")[1]);
+				String type = this.escapeValue(tokens.nextToken().split(":")[1]);
+				String ABV = this.escapeValue(tokens.nextToken().split(":")[1]);
+				String IBU = this.escapeValue(tokens.nextToken().split(":")[1]);
+				String origin = this.escapeValue(tokens.nextToken().split(":")[1]);
+				this.listBeer.add(new Beer(serialNumber, brand,
+						type, ABV, IBU, origin));
+			}
+		}
+	}
+	
+	private String escapeValue(String value) {
+		return value.replace("\"", "");
+	}
+	    
+	*/
+	
+	/** De aqui en adelante estaran los metodos de volcado y carga dependiendo el archivo plano. */
+	
+	/** Volcado de archivo plano tipo txt/CSV/Entre otros. */
+	private void dumpFilePlain(String nameFile) {
+		StringBuilder rutaArchivo = new StringBuilder();
+		rutaArchivo.append(config.getPathFile());
+		rutaArchivo.append(nameFile);
+		List<String> records = new ArrayList<>();
+		
+		 for(Beer beer : this.listBeer){
+			 StringBuilder contentBeer = new StringBuilder();
+			 contentBeer.append(beer.getSerialNumber()).append(CommonConstants.SEMICOLON);
+			 contentBeer.append(beer.getBrand()).append(CommonConstants.SEMICOLON);
+			 contentBeer.append(beer.getType()).append(CommonConstants.SEMICOLON);
+			 contentBeer.append(beer.getABV()).append(CommonConstants.SEMICOLON);
+			 contentBeer.append(beer.getIBU()).append(CommonConstants.SEMICOLON);
+			 contentBeer.append(beer.getOrigin());
+			 records.add(contentBeer.toString());
+		 }
+		 this.writer(rutaArchivo.toString(), records);
+	}
+	
+	/** Cargue de la informacion de archivo plano tipo txt/CSV/Entre otros.*/
+	private void loadFilePlain(String nameFile) {
+		List<String> contentInLine = this.reader(
+				config.getPathFile().concat(
+						nameFile));
+		contentInLine.forEach(row -> {
+			StringTokenizer tokens = new StringTokenizer(
+					row, CommonConstants.SEMICOLON);
+			while(tokens.hasMoreElements()){
+				String serialNumber = tokens.nextToken();
+				String brand = tokens.nextToken();
+				String type = tokens.nextToken();
+				String ABV = tokens.nextToken();
+				String IBU = tokens.nextToken();
+				String origin = tokens.nextToken();
+				this.listBeer.add(new Beer(serialNumber, brand,
+						type, ABV, IBU, origin));
+			}
+		});
+	}
+	
+	
+	/** Volcado de informacion tipo JSON usando la libreria Gson. */
 	private void dumpFileJSON() {
 	    String rutaArchivo = config.getPathFile()
 	            .concat(config.getNameFileJSON());
@@ -146,7 +242,7 @@ public class HandlingPersistenceBeer extends FilePlain
 	    }
 	}
 	
-	
+	/** Cargue de informacion tipo JSON usando la libreria Gson. */
 	private void loadFileJSON() {
 	    String rutaArchivo = config.getPathFile()
 	            .concat(config.getNameFileJSON());
@@ -161,6 +257,7 @@ public class HandlingPersistenceBeer extends FilePlain
 	}
 	
 	
+	/** Volcado de informacion tipo XML. */
 	private void dumpFileXML() {
 		String rutaArchivo = config.getPathFile()
 				.concat(config.getNameFileXML());
@@ -182,7 +279,8 @@ public class HandlingPersistenceBeer extends FilePlain
 		
 	}
 
-
+	
+	/** Cargue de informacion tipo XML usando la libreria propia del jdk. */
 	private void loadFileXML() {
 		try {
 			File file = new File(config.getPathFile().concat(config.getNameFileXML()));
@@ -203,10 +301,8 @@ public class HandlingPersistenceBeer extends FilePlain
 						.getTextContent();
 				String Origin = document.getElementsByTagName("Origin").item(i)
 						.getTextContent();
-				this.listBeer.add(new Beer(SerialNumber, Brand, Type, ABV, IBU, Origin));
-				
+				this.listBeer.add(new Beer(SerialNumber, Brand, Type, ABV, IBU, Origin));	
 			}
-			
 			
 		} catch (Exception e) {
 			System.out.println("No se puedo leer el XML");
@@ -214,50 +310,43 @@ public class HandlingPersistenceBeer extends FilePlain
 		
 	}
 	
-	private void dumpFilePlain(String nameFile) {
-		StringBuilder rutaArchivo = new StringBuilder();
-		rutaArchivo.append(config.getPathFile());
-		rutaArchivo.append(nameFile);
-		List<String> records = new ArrayList<>();
+	
+	/** Volcado de informacion tipo SER. */
+	private void dumpFileSerializate() {
+		try (FileOutputStream fileOut = new FileOutputStream(
+				this.config.getPathFile().concat(config.getNameFileSer()));
+				ObjectOutput out = new ObjectOutputStream(fileOut)){
+		out.writeObject(this.listBeer);	
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
 		
-		 for(Beer beer : this.listBeer){
-			 StringBuilder contentBeer = new StringBuilder();
-			 contentBeer.append(beer.getSerialNumber()).append(CommonConstants.SEMICOLON);
-			 contentBeer.append(beer.getBrand()).append(CommonConstants.SEMICOLON);
-			 contentBeer.append(beer.getType()).append(CommonConstants.SEMICOLON);
-			 contentBeer.append(beer.getABV()).append(CommonConstants.SEMICOLON);
-			 contentBeer.append(beer.getIBU()).append(CommonConstants.SEMICOLON);
-			 contentBeer.append(beer.getOrigin());
-			 records.add(contentBeer.toString());
-		 }
-		 this.writer(rutaArchivo.toString(), records);
 	}
 	
 	
-	private void loadFilePlain(String nameFile) {
-		List<String> contentInLine = this.reader(
-				config.getPathFile().concat(
-						nameFile));
-		contentInLine.forEach(row -> {
-			StringTokenizer tokens = new StringTokenizer(
-					row, CommonConstants.SEMICOLON);
-			while(tokens.hasMoreElements()){
-				String serialNumber = tokens.nextToken();
-				String brand = tokens.nextToken();
-				String type = tokens.nextToken();
-				String ABV = tokens.nextToken();
-				String IBU = tokens.nextToken();
-				String origin = tokens.nextToken();
-				this.listBeer.add(new Beer(serialNumber, brand,
-						type, ABV, IBU, origin));
-			}
-		});
+	/** Cargue de informacion tipo Ser. */
+	@SuppressWarnings("unchecked")
+	private void loadFileSerializate() {
+		try (FileInputStream fileIn = new FileInputStream(this.config.getPathFile()
+				.concat(this.config.getNameFileSer()));
+				ObjectInputStream in = new ObjectInputStream(fileIn)){
+			this.listBeer = (List<Beer>) in.readObject();
+		} catch (IOException i) {
+			i.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
-
+	
+	
+	
+	/** Metodo get de la lista del objeto(En este caso Beer). */
 	public List<Beer> getListBeer() {
 		return listBeer;
 	}
 
+	/** Metodo set de la lista del objeto(En este caso Beer). */
 	public void setListBeer(List<Beer> listBeer) {
 		this.listBeer = listBeer;
 	}

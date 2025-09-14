@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * @author Oswaldo Sierra
  */
-public class Beer implements Serializable{
+public class Beer implements Serializable{ 
 	
 	
 	private static final long serialVersionUID = 7758888672641333914L;

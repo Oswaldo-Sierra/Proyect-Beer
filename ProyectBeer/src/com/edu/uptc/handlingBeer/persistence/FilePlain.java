@@ -1,16 +1,16 @@
-package com.edu.uptc.handlingBeer.Persistence;
+package com.edu.uptc.handlingBeer.persistence;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileWriter; 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.edu.uptc.handlingBeer.Constants.*;
 import com.edu.uptc.handlingBeer.config.*;
+import com.edu.uptc.handlingBeer.constants.*;
 
 public class FilePlain {
 	protected Config config;

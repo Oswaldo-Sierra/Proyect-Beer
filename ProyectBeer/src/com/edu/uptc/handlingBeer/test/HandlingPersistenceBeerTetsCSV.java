@@ -1,12 +1,11 @@
-package com.edu.uptc.handlingBeer.Test;
+package com.edu.uptc.handlingBeer.test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.edu.uptc.handlingBeer.Enums.ETypeFile;
-import com.edu.uptc.handlingBeer.Persistence.HandlingPersistenceBeer;
+import com.edu.uptc.handlingBeer.enums.ETypeFile;
 import com.edu.uptc.handlingBeer.model.Beer;
+import com.edu.uptc.handlingBeer.persistence.HandlingPersistenceBeer;
 
 class HandlingPersistenceBeerTetsCSV {
 	

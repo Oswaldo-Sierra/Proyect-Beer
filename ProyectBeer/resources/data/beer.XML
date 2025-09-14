@@ -27,13 +27,4 @@
 	<Origin>Mexico</Origin> 
 
 </Beer>
-<Beer>
-	<SerialNumbre>SN-20250813-0004</SerialNumbre>
-	<Brand>Andina</Brand>
-	<Type>Cerverza de trigo</Type>
-	<ABV>3.0%</ABV>
-	<IBU>Rubia</IBU>
-	<Origin>Colombia</Origin> 
-
-</Beer>
 </XML>

@@ -1,4 +1,4 @@
-package com.edu.uptc.handlingBeer.Constants;
+package com.edu.uptc.handlingBeer.constants; 
 
 public class CommonConstants {
 	public static final String BREAK_LINE = "\n";
