@@ -2,6 +2,9 @@ package com.edu.uptc.handlingBeer.model;
 
 import java.io.Serializable;
 
+import com.edu.uptc.handlingBeer.enums.ETypeFile;
+
+
 /**
  * Clase del modelo que representa una cerveza con sus características
  * principales como marca, tipo, grado de alcohol, numero de serie, amargor y origen.
@@ -11,12 +14,10 @@ import java.io.Serializable;
  * @author Oswaldo Sierra
  */
 public class Beer implements Serializable{ 
-	
-	
 	private static final long serialVersionUID = 7758888672641333914L;
 
 	 /** El numero de serie unico en la botella o lata de la cerveza. */
-    private String serialNumber;
+    private int serialNumber;
 
     /** Marca de la cerveza. */
     private String brand;
@@ -30,28 +31,43 @@ public class Beer implements Serializable{
     /** Amargor de la cerveza medido en IBU (International Bitterness Units). */
     private String IBU;
     
-    /** País de origen de la cerveza. */
-    private String origin;
+    /**Provedor de la cerveza*/
+    private String provider;
+    
+    /**Precio de la cerveza*/
+    private int price;
+    
+    /**Cantidad de cervezas ingresadas/ comprada*/
+    private int quantity; 
     
     /**
      * Constructor que inicializa todos los atributos de la clase Beer.
      *
      */
-	public Beer(String serialNumber, String brand, String type, String aBV, String iBU, String origin) {
+    public Beer(int serialNumber, String brand, String type, String aBV, String iBU, String provider, int price,
+			int quantity) {
 		super();
 		this.serialNumber = serialNumber;
 		this.brand = brand;
 		this.type = type;
 		ABV = aBV;
 		IBU = iBU;
-		this.origin = origin;
+		this.provider = provider;
+		this.price = price;
+		this.quantity = quantity;
 	}
+	
+	//Constructor vacio
+	public Beer() {}
 
-	public String getSerialNumber() {
+	
+	public int getSerialNumber() {
 		return serialNumber;
 	}
+	
+	/** Getters y setters */
 
-	public void setSerialNumber(String serialNumber) {
+	public void setSerialNumber(int serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 
@@ -64,7 +80,7 @@ public class Beer implements Serializable{
 	}
 
 	public String getType() {
-		return type;
+		return String.valueOf(type);
 	}
 
 	public void setType(String type) {
@@ -87,12 +103,28 @@ public class Beer implements Serializable{
 		IBU = iBU;
 	}
 
-	public String getOrigin() {
-		return origin;
+	public String getProvider() {
+		return provider;
 	}
 
-	public void setOrigin(String origin) {
-		this.origin = origin;
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 }

@@ -1,0 +1,33 @@
+<XML version= "1.0" encoding ="UTF-8"> 
+
+<SalesOfBeers>
+	<SalesID>1</SalesID>
+	<NumberSerialOfBeer>2</NumberSerialOfBeer>
+	<NumberofBeersSold>20</NumberofBeersSold>
+	<PriceTotal>100000.0</PriceTotal>
+	<DateOfSale>2025-10-01</DateOfSale>
+	<UserName>Juan</UserName>
+	<CustomerName>Jairo</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>2</SalesID>
+	<NumberSerialOfBeer>2</NumberSerialOfBeer>
+	<NumberofBeersSold>20</NumberofBeersSold>
+	<PriceTotal>100000.0</PriceTotal>
+	<DateOfSale>2025-09-09</DateOfSale>
+	<UserName>Juan</UserName>
+	<CustomerName>Jairo</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>3</SalesID>
+	<NumberSerialOfBeer>2</NumberSerialOfBeer>
+	<NumberofBeersSold>20</NumberofBeersSold>
+	<PriceTotal>100000.0</PriceTotal>
+	<DateOfSale>2025-09-09</DateOfSale>
+	<UserName>Juan</UserName>
+	<CustomerName>Jairo</CustomerName> 
+
+</SalesOfBeers>
+</XML>

@@ -1,0 +1,29 @@
+[
+  {
+    "salesID": 1,
+    "numberSerialOfBeer": 2,
+    "numberOfBeersSold": 20,
+    "priceTotal": 100000.0,
+    "dateOfSale": "01/10/2025",
+    "userName": "Juan",
+    "customerName": "Jairo"
+  },
+  {
+    "salesID": 2,
+    "numberSerialOfBeer": 2,
+    "numberOfBeersSold": 20,
+    "priceTotal": 100000.0,
+    "dateOfSale": "09/09/2025",
+    "userName": "Juan",
+    "customerName": "Jairo"
+  },
+  {
+    "salesID": 3,
+    "numberSerialOfBeer": 2,
+    "numberOfBeersSold": 20,
+    "priceTotal": 100000.0,
+    "dateOfSale": "09/09/2025",
+    "userName": "Juan",
+    "customerName": "Jairo"
+  }
+]

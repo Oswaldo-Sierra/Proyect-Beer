@@ -1,34 +1,42 @@
 [
   {
-    "serialNumber": "SN-20250813-0001",
-    "brand": "Corona",
-    "type": "Large",
-    "ABV": "4.5%",
-    "IBU": "Rubia",
-    "origin": "Mexico"
+    "serialNumber": 1,
+    "brand": "Poker",
+    "type": "Lager",
+    "ABV": "4,8",
+    "IBU": "Bajo",
+    "provider": "Bavaria",
+    "price": 2000,
+    "quantity": 20
   },
   {
-    "serialNumber": "SN-20250813-0002",
-    "brand": "Corona",
-    "type": "Large",
-    "ABV": "4.8%",
-    "IBU": "Rubia",
-    "origin": "Mexico"
+    "serialNumber": 3,
+    "brand": "Guinnes",
+    "type": "Lager",
+    "ABV": "4,8",
+    "IBU": "Bajo",
+    "provider": "Bavaria",
+    "price": 2000,
+    "quantity": 20
   },
   {
-    "serialNumber": "SN-20250813-0003",
+    "serialNumber": 4,
     "brand": "Corona",
-    "type": "Large",
-    "ABV": "4.5%",
-    "IBU": "Rubia",
-    "origin": "Mexico"
+    "type": "Stout",
+    "ABV": "4,5",
+    "IBU": "Media",
+    "provider": "su mama",
+    "price": 123,
+    "quantity": 20
   },
   {
-    "serialNumber": "SN-20250813-0004",
-    "brand": "Andina",
-    "type": "Cerverza de trigo",
-    "ABV": "3.0%",
-    "IBU": "Rubia",
-    "origin": "Colombia"
+    "serialNumber": 5,
+    "brand": "Budweiser",
+    "type": "Large",
+    "ABV": "4,4",
+    "IBU": "Media",
+    "provider": "no se",
+    "price": 2000,
+    "quantity": 200
   }
 ]

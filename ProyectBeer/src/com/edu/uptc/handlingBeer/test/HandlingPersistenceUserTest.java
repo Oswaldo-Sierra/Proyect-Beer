@@ -34,10 +34,14 @@ private HandlingPersistenceUser hPU = new HandlingPersistenceUser();
 		/** Simulacion de que la persona ingrese datos */
 		User user = new User("Juan", "123");
 		User user2 = new User("harold", "0987");
+		User user3 = new User("Juan", "123");
 
 		/** Se guarda en la lista */
 		this.hPU.addUser(user);
 		this.hPU.addUser(user2);
+		this.hPU.addUser(user3);
+		
+		assertEquals(this.hPU.getListusers().size(), 2);
 	}
 	
 

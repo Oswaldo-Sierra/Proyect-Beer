@@ -1,10 +1,9 @@
 package com.edu.uptc.handlingBeer.gui;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -15,16 +14,36 @@ public class PanelButtonMainWindow extends JPanel{
 	
 	
 	public PanelButtonMainWindow() {
-		setLayout(new FlowLayout());
-		setBorder(new EmptyBorder(0,0,20,0));
-		//setPreferredSize(new Dimension(200,100));
+		this.initComponets();
+		this.addComponents();
+	}
+
+
+	private void addComponents() {
+		this.add(btnSortTable);
+		this.add(btnClearTable);
+		
+	}
+
+	private void initComponets() {
+		setUpScreen();
+		initializeComponents();
+		
+	}
+
+	private void initializeComponents() {
 		this.btnSortTable = new JButton("Ordenar tabla");
 		this.btnClearTable = new JButton("Limpiar Registro repetidos");
 		this.btnClearTable.setFocusable(false);
 		this.btnSortTable.setFocusable(false);
 		
-		this.add(btnSortTable);
-		this.add(btnClearTable);
+	}
+
+
+	private void setUpScreen() {
+		setLayout(new FlowLayout());
+		setBorder(new EmptyBorder(0,0,20,0));
+		setBackground(Color.WHITE);
 	}
 
 

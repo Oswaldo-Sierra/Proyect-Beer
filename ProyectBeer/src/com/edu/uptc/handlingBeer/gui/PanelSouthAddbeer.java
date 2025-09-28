@@ -11,18 +11,40 @@ public class PanelSouthAddbeer extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton btnBack;
 	private JButton btnAcept;
-	
-	public PanelSouthAddbeer() {
-		setLayout(new FlowLayout());
-		setBorder(new EmptyBorder(0,0,50,0));
-		setBackground(Color.WHITE);
-		
-		this.btnBack = new JButton("Volver atras");
-		this.btnAcept = new JButton("Aceptar");
-		
+	private MainWindow mainWindow;
+
+	public PanelSouthAddbeer(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+		this.initComponets();
+		this.addComponents();
+	}
+
+	private void addComponents() {
 		this.add(btnBack);
 		this.add(btnAcept);
-		
+
+	}
+
+	private void initComponets() {
+		setUpScreen();
+		initializeComponents();
+
+	}
+
+	private void initializeComponents() {
+		this.btnBack = new JButton("Volver atras");
+		this.btnBack.setActionCommand(HandlingEventsAddWindow.GET_BACK);
+		this.btnBack.addActionListener(new HandlingEventsAddWindow(this.mainWindow));
+		this.btnAcept = new JButton("Aceptar");
+		this.btnAcept.setActionCommand(HandlingEventsAddWindow.ADD_BEER);
+		this.btnAcept.addActionListener(new HandlingEventsAddWindow(this.mainWindow));
+
+	}
+
+	private void setUpScreen() {
+		setLayout(new FlowLayout());
+		setBorder(new EmptyBorder(0, 0, 10, 0));
+		setBackground(Color.WHITE);
 	}
 
 }

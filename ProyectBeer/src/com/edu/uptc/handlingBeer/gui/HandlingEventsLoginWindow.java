@@ -1,52 +1,229 @@
 package com.edu.uptc.handlingBeer.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import com.edu.uptc.handlingBeer.enums.ETypeFile;
+import com.edu.uptc.handlingBeer.model.*;
 import com.edu.uptc.handlingBeer.persistence.HandlingPersistenceUser;
 
 public class HandlingEventsLoginWindow implements ActionListener {
 
+	// Constantes para los comandos
 	public static final String VALIDATE_LOGIN = "VALIDATE_LOGIN";
-	public PanelRightLoginWindow panelRightLoginWindow;
-	private HandlingPersistenceUser handlingPersistenceUser;
+	public static final String FORGET_PASSWORD = "FORGET_PASSWORD";
+	public static final String CREATE_ACCOUNT = "CREATE_ACCOUNT";
+	public static final String VALIDATE_SIGNUP = "VALIDATE_SIGNUP";
+	public static final String VALIDATE_FORGET_PASSWORD = "VALIDATE_FORGET_PASSWORD";
+	public static final String GET_BACK = "GET_BACK";
 
-	public HandlingEventsLoginWindow(PanelRightLoginWindow panelRightLoginWindow) {
-		this.panelRightLoginWindow = panelRightLoginWindow;
-		this.handlingPersistenceUser = new HandlingPersistenceUser();
-		this.handlingPersistenceUser.loadFile(ETypeFile.SER);
+	private final LoginWindow loginWindow;
+	private final HandlingPersistenceUser persistenceUser;
+
+	public HandlingEventsLoginWindow(LoginWindow loginWindow) {
+		this.loginWindow = loginWindow;
+		this.persistenceUser = new HandlingPersistenceUser();
+		this.persistenceUser.loadFile(ETypeFile.SER);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case VALIDATE_LOGIN:
-			String nameuser = this.panelRightLoginWindow.getInputUserName();
-			String password = this.panelRightLoginWindow.getInputPassword();
-
-			if (Boolean.TRUE.equals(this.handlingPersistenceUser.findUserByUsernamePassword(nameuser, password))) {
-				Window ventana = SwingUtilities.getWindowAncestor(this.panelRightLoginWindow);
-				if (ventana != null) {
-					/* Oculta la vista del login */
-					ventana.setVisible(false);
-
-					/* Muestra la vista principal */
-					this.panelRightLoginWindow.getMainWindow().setVisible(true);
-					this.panelRightLoginWindow.getLblMessageError().setVisible(false);
-				}
-			} else {
-				this.panelRightLoginWindow.getLblMessageError().setVisible(true);
-			}
+			validateLogin();
 			break;
-
-		default:
+		case FORGET_PASSWORD:
+			showPanelForgetPassword();
+			break;
+		case CREATE_ACCOUNT:
+			showPanelSignUp();
+			break;
+		case VALIDATE_SIGNUP:
+			validateSignUp();
+			break;
+		case VALIDATE_FORGET_PASSWORD:
+			validateForgetPassword();
+			break;
+		case GET_BACK:
+			showPanelLogin();
 			break;
 		}
+	}
 
+	/**
+	 * Valida las credenciales de inicio de sesión
+	 */
+	private void validateLogin() {
+		String username = loginWindow.getPanelRightLoginWindow().getInputUserName().getText();
+		String password = loginWindow.getPanelRightLoginWindow().getInputPassword().getText();
+
+		if (username.isEmpty() || password.isEmpty()) {
+			showError(loginWindow.getPanelRightLoginWindow().getLblMessageError1(),
+					"Por favor complete todos los campos.");
+			return;
+		}
+
+		if (Boolean.TRUE.equals(persistenceUser.findUserByUsernamePassword(username, password))) {
+			Window ventana = SwingUtilities.getWindowAncestor(loginWindow.getPanelRightLoginWindow());
+			if (ventana != null) {
+				ventana.setVisible(false);
+				loginWindow.getMainWindow().setVisible(true);
+			}
+		} else {
+			showError(loginWindow.getPanelRightLoginWindow().getLblMessageError1(),
+					"El usuario no se encuentra registrado.");
+		}
+	}
+
+	/**
+	 * Valida el registro de un nuevo usuario
+	 */
+	private void validateSignUp() {
+		String username = this.loginWindow.getPanelRightSignuUpWindow().getInputUserName().getText();
+		String password = this.loginWindow.getPanelRightSignuUpWindow().getInputPassword().getText();
+		String confirmPassword = loginWindow.getPanelRightSignuUpWindow().getInputConfirmPassword().getText();
+
+		if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(),
+					"Por favor complete todos los campos.");
+			return;
+		}
+
+		if (!password.equals(confirmPassword)) {
+			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(), "La contraseña no coincide.");
+			return;
+		}
+
+		if (Boolean.TRUE.equals(persistenceUser.findUserByUsernamePassword(username, password))) {
+			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(),
+					"El usuario ya se encuentra registrado.");
+			return;
+		}
+
+		// Registro exitoso
+		Window ventana = SwingUtilities.getWindowAncestor(this.loginWindow.getPanelRightSignuUpWindow());
+		if (ventana != null) {
+			ventana.setVisible(false);
+			User user = new User(username, password);
+			persistenceUser.addUser(user);
+			persistenceUser.dumpFile(ETypeFile.SER);
+			loginWindow.getMainWindow().setVisible(true);
+		}
+	}
+
+	/**
+	 * Valida la nueva contraseña
+	 */
+
+	private void validateForgetPassword() {
+		String username = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputUserName().getText();
+		String newPassword = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputnewPassword().getText();
+		String confirmNewPassword = loginWindow.getPanelRightRecoverPasswordWindow().getInputConfirmNewPassword()
+				.getText();
+
+		if (username.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
+			showError(this.loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError(),
+					"Por favor complete todos los campos.");
+			return;
+		}
+
+		if (!newPassword.equals(confirmNewPassword)) {
+			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(), "La contraseña no coincide.");
+			return;
+		}
+
+		if (this.persistenceUser.findUserByUsername(username)) {
+			// Registro exitoso
+			Window ventana = SwingUtilities.getWindowAncestor(this.loginWindow.getPanelRightRecoverPasswordWindow());
+			if (ventana != null) {
+				ventana.setVisible(false);
+				for (User user : this.persistenceUser.getListusers()) {
+					if (user.getNameUser().equals(username)) {
+						user.setPassword(newPassword);
+						break;
+					}
+				}
+				this.persistenceUser.dumpFile(ETypeFile.SER);
+				this.loginWindow.getMainWindow().setVisible(true);
+			}
+		} else {
+			showError(this.loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError(),
+					"El usuario no se encuentra registrado.");
+		}
+
+	}
+
+	/**
+	 * Muestra el panel de inicio de sesión
+	 */
+	private void showPanelLogin() {
+		clearSignUpPanel();
+		clearRecoverPasswordPanel();
+		this.loginWindow.getPanelRightRecoverPasswordWindow().setVisible(false);
+		this.loginWindow.getPanelRightSignuUpWindow().setVisible(false);
+		this.loginWindow.getPanelRightLoginWindow().setVisible(true);
+	}
+
+	/**
+	 * Muestra el panel de registro
+	 */
+	private void showPanelSignUp() {
+		clearLoginPanel();
+		this.loginWindow.getPanelRightLoginWindow().setVisible(false);
+		this.loginWindow.add(loginWindow.getPanelRightSignuUpWindow(), BorderLayout.EAST);
+		this.loginWindow.getPanelRightSignuUpWindow().setVisible(true);
+	}
+
+	/**
+	 * Muestra el panel de recuperar contraseña
+	 */
+	private void showPanelForgetPassword() {
+		clearLoginPanel();
+		this.loginWindow.getPanelRightLoginWindow().setVisible(false);
+		this.loginWindow.add(this.loginWindow.getPanelRightRecoverPasswordWindow(), BorderLayout.EAST);
+		this.loginWindow.getPanelRightRecoverPasswordWindow().setVisible(true);
+	}
+
+	/**
+	 * Limpia el panel de login
+	 */
+	private void clearLoginPanel() {
+		loginWindow.getPanelRightLoginWindow().getInputUserName().setText("");
+		loginWindow.getPanelRightLoginWindow().getInputPassword().setText("");
+		loginWindow.getPanelRightLoginWindow().getLblMessageError1().setVisible(false);
+	}
+
+	/**
+	 * Limpia el panel de registro
+	 */
+	private void clearSignUpPanel() {
+		loginWindow.getPanelRightSignuUpWindow().getInputUserName().setText("");
+		loginWindow.getPanelRightSignuUpWindow().getInputPassword().setText("");
+		loginWindow.getPanelRightSignuUpWindow().getInputConfirmPassword().setText("");
+		loginWindow.getPanelRightSignuUpWindow().getLblMessageError().setVisible(false);
+	}
+
+	/**
+	 * Limpia el panel de recuperar contraseña
+	 */
+	private void clearRecoverPasswordPanel() {
+		loginWindow.getPanelRightRecoverPasswordWindow().getInputUserName().setText("");
+		loginWindow.getPanelRightRecoverPasswordWindow().getInputnewPassword().setText("");
+		loginWindow.getPanelRightRecoverPasswordWindow().getInputConfirmNewPassword().setText("");
+		loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError().setVisible(false);
+	}
+
+	/**
+	 * Método auxiliar para mostrar mensajes de error
+	 */
+	private void showError(JLabel label, String message) {
+		label.setText(message);
+		label.setVisible(true);
 	}
 
 }

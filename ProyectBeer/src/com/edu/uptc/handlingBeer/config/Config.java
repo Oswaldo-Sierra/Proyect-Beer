@@ -22,6 +22,16 @@ public class Config {
 	private String nameFileSer;
 
 	private String userFileSer;
+	
+	private String SalesOfBeerTXT;
+	
+	private String SalesOfBeerCSV;
+	
+	private String SalesOfBeerJSON;
+	
+	private String SalesOfBeerXML;
+	
+	private String SalesOfBeerSER;	
 
 	private Properties properties;
 
@@ -30,13 +40,22 @@ public class Config {
 		try (FileInputStream entrada = new FileInputStream("resources/config/appconfig.properties")) {
 			// lo connvierte en un mapa
 			properties.load(entrada);
+			//Cervezas
 			this.pathFile = properties.getProperty("app.config.path.file");
 			this.nameFileTXT = properties.getProperty("app.config.path.file.name.txt");
 			this.nameFileCSV = properties.getProperty("app.config.path.file.name.csv");
 			this.nameFileJSON = properties.getProperty("app.config.path.file.name.json");
 			this.nameFileXML = properties.getProperty("app.config.path.file.name.xml");
 			this.nameFileSer = properties.getProperty("app.config.path.file.name.ser");
+			//Usuario
 			this.userFileSer = properties.getProperty("app.config.path.file.user.ser");
+			//Ventas
+			this.SalesOfBeerTXT = properties.getProperty("app.config.path.file.SalesOfBeer.txt");
+			this.SalesOfBeerCSV = properties.getProperty("app.config.path.file.SalesOfBeer.csv");
+			this.SalesOfBeerJSON = properties.getProperty("app.config.path.file.SalesOfBeer.json");
+			this.SalesOfBeerXML = properties.getProperty("app.config.path.file.SalesOfBeer.xml");
+			this.SalesOfBeerSER = properties.getProperty("app.config.path.file.SalesOfBeer.ser");
+			
 		} catch (IOException ex) {
 			System.err.println("Error al cargar el archivo properties de configuración: " + ex.getMessage());
 		}
@@ -107,4 +126,53 @@ public class Config {
 		this.nameFileSer = nameFileSer;
 	}
 
+	public String getSalesOfBeerTXT() {
+		return SalesOfBeerTXT;
+	}
+
+	public void setSalesOfBeerTXT(String salesOfBeerTXT) {
+		SalesOfBeerTXT = salesOfBeerTXT;
+	}
+
+	public String getSalesOfBeerCSV() {
+		return SalesOfBeerCSV;
+	}
+
+	public void setSalesOfBeerCSV(String salesOfBeerCSV) {
+		SalesOfBeerCSV = salesOfBeerCSV;
+	}
+
+	public String getSalesOfBeerJSON() {
+		return SalesOfBeerJSON;
+	}
+
+	public void setSalesOfBeerJSON(String salesOfBeerJSON) {
+		SalesOfBeerJSON = salesOfBeerJSON;
+	}
+
+	public String getSalesOfBeerXML() {
+		return SalesOfBeerXML;
+	}
+
+	public void setSalesOfBeerXML(String salesOfBeerXML) {
+		SalesOfBeerXML = salesOfBeerXML;
+	}
+
+	public String getSalesOfBeerSER() {
+		return SalesOfBeerSER;
+	}
+
+	public void setSalesOfBeerSER(String salesOfBeerSER) {
+		SalesOfBeerSER = salesOfBeerSER;
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	
 }

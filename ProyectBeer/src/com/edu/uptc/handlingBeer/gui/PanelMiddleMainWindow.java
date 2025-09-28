@@ -1,8 +1,8 @@
 package com.edu.uptc.handlingBeer.gui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import com.edu.uptc.handlingBeer.persistence.HandlingPersistenceBeer;
 
 public class PanelMiddleMainWindow extends JPanel {
 
@@ -21,9 +23,10 @@ public class PanelMiddleMainWindow extends JPanel {
 	private MainWindow mainWindow;
 
 	public PanelMiddleMainWindow(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
 		setLayout(new GridLayout(1, 1));
 		setBorder(new EmptyBorder(40, 10, 10, 10));
+		setBackground(Color.WHITE);
+		this.mainWindow = mainWindow;
 		this.buildComponents();
 		this.addcComponents();
 	}
@@ -37,26 +40,27 @@ public class PanelMiddleMainWindow extends JPanel {
 		this.add(new JScrollPane(table));
 	}
 
+		
 	private void buildComponents() {
 		String[] titles = { " Numero serial ", " Marca ", " Tipo ", " Grado de alcohol(ABV) ", " Amargor(IBU) ",
-				" Origen " };
+				" Provedor " , " Precio " , " Cantidad Disponible " };
 		dtm = new DefaultTableModel(titles, 0);
 		table = new JTable(dtm);
-		
+		table.setBackground(Color.WHITE);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 		this.table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting() && table.getSelectedRow() != 1) {
+				if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
 					int fila = table.getSelectedRow();
-					//String nombre = table.getValueAt(fila,0).toString();
-					//System.out.println("Se selecciono: " + nombre);
-					
+					String serialNumber = table.getValueAt(fila, 0).toString();
+					//System.out.println("Se obtuvo el Numero de serie a eliminar : " + serialNumber);
+					HandlingPersistenceBeer.SERIALNUMBER_BEER_SELECTED = serialNumber;
 					mainWindow.getPanelRightButtonMainWindow().setVisible(true);
+
 				}
-				
+
 			}
 		});
 
@@ -69,6 +73,26 @@ public class PanelMiddleMainWindow extends JPanel {
 	public void setDtm(String[] titles) {
 		dtm = new DefaultTableModel(titles, 0);
 		this.table.setModel(dtm);
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public MainWindow getMainWindow() {
+		return mainWindow;
+	}
+
+	public void setMainWindow(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+	}
+
+	public void setDtm(DefaultTableModel dtm) {
+		this.dtm = dtm;
 	}
 	
 	

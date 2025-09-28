@@ -1,30 +1,47 @@
 <XML version= "1.0" encoding ="UTF-8"> 
 
 <Beer>
-	<SerialNumbre>SN-20250813-0001</SerialNumbre>
-	<Brand>Corona</Brand>
-	<Type>Large</Type>
-	<ABV>4.5%</ABV>
-	<IBU>Rubia</IBU>
-	<Origin>Mexico</Origin> 
+	<SerialNumbre>1</SerialNumbre>
+	<Brand>Poker</Brand>
+	<Type>Lager</Type>
+	<ABV>4,8</ABV>
+	<IBU>Bajo</IBU>
+	<Provider>Bavaria</Provider>
+	<Price>2000</Price>
+	<Quantity>20</Quantity> 
 
 </Beer>
 <Beer>
-	<SerialNumbre>SN-20250813-0002</SerialNumbre>
-	<Brand>Corona</Brand>
-	<Type>Large</Type>
-	<ABV>4.8%</ABV>
-	<IBU>Rubia</IBU>
-	<Origin>Mexico</Origin> 
+	<SerialNumbre>3</SerialNumbre>
+	<Brand>Guinnes</Brand>
+	<Type>Lager</Type>
+	<ABV>4,8</ABV>
+	<IBU>Bajo</IBU>
+	<Provider>Bavaria</Provider>
+	<Price>2000</Price>
+	<Quantity>20</Quantity> 
 
 </Beer>
 <Beer>
-	<SerialNumbre>SN-20250813-0003</SerialNumbre>
+	<SerialNumbre>4</SerialNumbre>
 	<Brand>Corona</Brand>
+	<Type>Stout</Type>
+	<ABV>4,5</ABV>
+	<IBU>Media</IBU>
+	<Provider>su mama</Provider>
+	<Price>123</Price>
+	<Quantity>20</Quantity> 
+
+</Beer>
+<Beer>
+	<SerialNumbre>5</SerialNumbre>
+	<Brand>Budweiser</Brand>
 	<Type>Large</Type>
-	<ABV>4.5%</ABV>
-	<IBU>Rubia</IBU>
-	<Origin>Mexico</Origin> 
+	<ABV>4,4</ABV>
+	<IBU>Media</IBU>
+	<Provider>no se</Provider>
+	<Price>2000</Price>
+	<Quantity>200</Quantity> 
 
 </Beer>
 </XML>

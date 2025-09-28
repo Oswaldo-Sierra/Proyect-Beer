@@ -23,7 +23,8 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 	}
 
 	public Boolean addUser(User user) {
-		if (!this.findUserByUsernamePassword(user.getNameUser(), user.getPassword())) {
+		if (!this.findUserByUsernamePassword(user.getNameUser(), user.getPassword())
+				&& !this.findUserByUsername(user.getNameUser())) {
 			listusers.add(user);
 			return Boolean.TRUE;
 		}
@@ -33,6 +34,10 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 
 	public boolean findUserByUsernamePassword(String nameUser, String password) {
 		return listusers.stream().anyMatch(u -> u.getNameUser().equals(nameUser) && u.getPassword().equals(password));
+	}
+
+	public boolean findUserByUsername(String nameUser) {
+		return listusers.stream().anyMatch(u -> u.getNameUser().equals(nameUser));
 	}
 
 	/**
@@ -71,13 +76,13 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 	/** Cargue de informacion tipo Ser. */
 	@SuppressWarnings("unchecked")
 	private void loadFileSerializate() {
-		try (FileInputStream fileIn = new FileInputStream(this.config.getPathFile()
-				.concat(this.config.getUserFileSer()));
-				ObjectInputStream in = new ObjectInputStream(fileIn)){
+		try (FileInputStream fileIn = new FileInputStream(
+				this.config.getPathFile().concat(this.config.getUserFileSer()));
+				ObjectInputStream in = new ObjectInputStream(fileIn)) {
 			this.listusers = (List<User>) in.readObject();
 		} catch (IOException i) {
 			i.printStackTrace();
-		}catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -90,6 +95,5 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 	public void setListusers(List<User> listusers) {
 		this.listusers = listusers;
 	}
-	
-	
+
 }
