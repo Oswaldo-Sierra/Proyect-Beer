@@ -5,11 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class PanelRightSignuUpWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -65,19 +65,25 @@ public class PanelRightSignuUpWindow extends JPanel {
 	private void initializeComponents() {
 		this.lbTitle = new JLabel("Sign Up");
 		this.lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		this.lblUserName= new JLabel("Nombre de usuario:");
 		this.inputUserName = new StyledTextField(Boolean.FALSE);
 		this.lblPassword = new JLabel("Contraseña");
 		this.inputPassword = new StyledTextField(Boolean.TRUE);
 		this.lblConfirmPassword = new JLabel("Confirme su contraseña");
 		this.inputConfirmPassword = new StyledTextField(Boolean.TRUE);
+		
 		this.btnAcept = new JButton("Aceptar");
-		this.btnAcept.setBackground(GUIUtils.getPrincipalcolor());
-		this.btnAcept.setForeground(Color.WHITE);
+		this.btnAcept.setBorder(new LineBorder(GUIUtils.getPrincipalColor()));
+		this.btnAcept.setBackground(GUIUtils.getPrincipalColor());
 		this.btnAcept.setFocusable(false);
+		
 		this.btnAcept.setActionCommand(HandlingEventsLoginWindow.VALIDATE_SIGNUP);
 		this.btnAcept.addActionListener(this.loginWindow.getHandlingEventsLoginWindow());
+		
 		this.btnBack = new JButton("Volver atras");
+		this.btnBack.setBorderPainted(false);
+		this.btnBack.setContentAreaFilled(false);
 		this.btnBack.setActionCommand(HandlingEventsLoginWindow.GET_BACK);
 		this.btnBack.addActionListener(this.loginWindow.getHandlingEventsLoginWindow());
 		

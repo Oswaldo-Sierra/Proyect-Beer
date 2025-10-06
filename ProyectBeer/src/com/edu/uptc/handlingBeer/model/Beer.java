@@ -2,49 +2,49 @@ package com.edu.uptc.handlingBeer.model;
 
 import java.io.Serializable;
 
-import com.edu.uptc.handlingBeer.enums.ETypeFile;
-
-
 /**
  * Clase del modelo que representa una cerveza con sus características
- * principales como marca, tipo, grado de alcohol, numero de serie, amargor y origen.
+ * principales como marca, tipo, grado de alcohol, numero de serie, amargor y
+ * origen.
  * 
- * <p>Este modelo es usado para gestionar información de cervezas en la aplicación.</p>
+ * <p>
+ * Este modelo es usado para gestionar información de cervezas en la aplicación.
+ * </p>
  * 
  * @author Oswaldo Sierra
  */
-public class Beer implements Serializable{ 
+public class Beer implements Serializable {
 	private static final long serialVersionUID = 7758888672641333914L;
 
-	 /** El numero de serie unico en la botella o lata de la cerveza. */
-    private int serialNumber;
+	/** El numero de serie unico en la botella o lata de la cerveza. */
+	private int serialNumber;
 
-    /** Marca de la cerveza. */
-    private String brand;
-    
-    /** Tipo de la cerveza (ej. Lager, IPA, Stout, etc.). */
-    private String type;
-    
-    /** Grado de alcohol por volumen (ABV) de la cerveza. */
-    private String ABV; 
-    
-    /** Amargor de la cerveza medido en IBU (International Bitterness Units). */
-    private String IBU;
-    
-    /**Provedor de la cerveza*/
-    private String provider;
-    
-    /**Precio de la cerveza*/
-    private int price;
-    
-    /**Cantidad de cervezas ingresadas/ comprada*/
-    private int quantity; 
-    
-    /**
-     * Constructor que inicializa todos los atributos de la clase Beer.
-     *
-     */
-    public Beer(int serialNumber, String brand, String type, String aBV, String iBU, String provider, int price,
+	/** Marca de la cerveza. */
+	private String brand;
+
+	/** Tipo de la cerveza (ej. Lager, IPA, Stout, etc.). */
+	private String type;
+
+	/** Grado de alcohol por volumen (ABV) de la cerveza. */
+	private String ABV;
+
+	/** Amargor de la cerveza medido en IBU (International Bitterness Units). */
+	private String IBU;
+
+	/** Provedor de la cerveza */
+	private String provider;
+
+	/** Precio de la cerveza */
+	private int price;
+
+	/** Cantidad de cervezas ingresadas/ comprada */
+	private int quantity;
+
+	/**
+	 * Constructor que inicializa todos los atributos de la clase Beer.
+	 *
+	 */
+	public Beer(int serialNumber, String brand, String type, String aBV, String iBU, String provider, int price,
 			int quantity) {
 		super();
 		this.serialNumber = serialNumber;
@@ -56,15 +56,15 @@ public class Beer implements Serializable{
 		this.price = price;
 		this.quantity = quantity;
 	}
-	
-	//Constructor vacio
-	public Beer() {}
 
-	
+	// Constructor vacio
+	public Beer() {
+	}
+
 	public int getSerialNumber() {
 		return serialNumber;
 	}
-	
+
 	/** Getters y setters */
 
 	public void setSerialNumber(int serialNumber) {
@@ -126,5 +126,5 @@ public class Beer implements Serializable{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 }

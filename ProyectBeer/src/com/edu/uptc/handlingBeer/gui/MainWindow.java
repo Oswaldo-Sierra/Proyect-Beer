@@ -7,24 +7,29 @@ import javax.swing.JFrame;
 
 import com.edu.uptc.handlingBeer.enums.ETypeFile;
 import com.edu.uptc.handlingBeer.persistence.HandlingPersistenceBeer;
+import com.edu.uptc.handlingBeer.persistence.HandlingPersistenceSalesOfBeer;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private OptionsBar optionsBar;
 	private PanelNorthMainWindow panelNorthMainWindow;
 	private PanelMiddleMainWindow panelMiddleMainWindow;
-	private PanelButtonMainWindow panelButtonMainWindow;
+	private PanelSouthMainWindow panelSouthMainWindow;
 	private PanelRightButtonMainWindow panelRightButtonMainWindow;
 
-	/** Definimos pantalla auxiliar*/
+	/** Definimos pantalla auxiliar */
 	private AddBeerWindow addBeerWindow;
+	private AddSalesOfBeerWindow addSalesOfBeerWindow;
 	private ShowBeerbyBrandWindow showBeerbyBrandWindow;
 	private FindBeerWindow findBeerWindow;
-	
+	private ChangeUserComponents changeUserComponents;
+
 	/* Clase que va a manejar los eventos de todos los paneles */
 	private HandlingEventsMainWindow handlingEventsMainWindow;
-	
+	private HandlingKeyEventsMainWindow handlingKeyEventsMainWindow;
+
 	private HandlingPersistenceBeer handlingPersistenceBeer;
+	private HandlingPersistenceSalesOfBeer handlingPersistenceSalesOfBeer;
 
 	public MainWindow() {
 		this.initComponets();
@@ -34,7 +39,7 @@ public class MainWindow extends JFrame {
 	private void addCompenents() {
 		this.add(panelNorthMainWindow, BorderLayout.NORTH);
 		this.add(panelMiddleMainWindow, BorderLayout.CENTER);
-		this.add(panelButtonMainWindow, BorderLayout.SOUTH);
+		this.add(panelSouthMainWindow, BorderLayout.SOUTH);
 		this.add(panelRightButtonMainWindow, BorderLayout.EAST);
 		this.setJMenuBar(optionsBar);
 	}
@@ -51,24 +56,29 @@ public class MainWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBackground(Color.WHITE);
+		setBackground(Color.WHITE);
 
 	}
 
 	/** Metodo que inicializa los comoponentes. */
 	private void initializeComponents() {
 		this.handlingEventsMainWindow = new HandlingEventsMainWindow(this);
+		this.handlingKeyEventsMainWindow = new HandlingKeyEventsMainWindow(this);
 		this.handlingPersistenceBeer = new HandlingPersistenceBeer();
 		this.handlingPersistenceBeer.loadFile(ETypeFile.FILE_PLAIN);
-		
+		this.handlingPersistenceSalesOfBeer = new HandlingPersistenceSalesOfBeer();
+		this.handlingPersistenceSalesOfBeer.loadFile(ETypeFile.FILE_PLAIN);
+
 		this.optionsBar = new OptionsBar(this);
 		this.panelNorthMainWindow = new PanelNorthMainWindow(this);
 		this.panelMiddleMainWindow = new PanelMiddleMainWindow(this);
-		this.panelButtonMainWindow = new PanelButtonMainWindow();
+		this.panelSouthMainWindow = new PanelSouthMainWindow(this);
 		this.panelRightButtonMainWindow = new PanelRightButtonMainWindow(this);
 		this.panelRightButtonMainWindow.setVisible(false);
-		
+
 		this.addBeerWindow = new AddBeerWindow(this);
+		this.changeUserComponents = new ChangeUserComponents();
+		this.addSalesOfBeerWindow = new AddSalesOfBeerWindow(this);
 		this.showBeerbyBrandWindow = new ShowBeerbyBrandWindow(this);
 		this.findBeerWindow = new FindBeerWindow(this);
 	}
@@ -97,12 +107,14 @@ public class MainWindow extends JFrame {
 		this.panelMiddleMainWindow = panelMiddleMainWindow;
 	}
 
-	public PanelButtonMainWindow getPanelButtonMainWindow() {
-		return panelButtonMainWindow;
+	
+
+	public PanelSouthMainWindow getPanelSouthMainWindow() {
+		return panelSouthMainWindow;
 	}
 
-	public void setPanelButtonMainWindow(PanelButtonMainWindow panelButtonMainWindow) {
-		this.panelButtonMainWindow = panelButtonMainWindow;
+	public void setPanelSouthMainWindow(PanelSouthMainWindow panelSouthMainWindow) {
+		this.panelSouthMainWindow = panelSouthMainWindow;
 	}
 
 	public PanelRightButtonMainWindow getPanelRightButtonMainWindow() {
@@ -128,8 +140,6 @@ public class MainWindow extends JFrame {
 	public void setHandlingEventsMainWindow(HandlingEventsMainWindow handlingEventsMainWindow) {
 		this.handlingEventsMainWindow = handlingEventsMainWindow;
 	}
-	
-	
 
 	public HandlingPersistenceBeer getHandlingPersistenceBeer() {
 		return handlingPersistenceBeer;
@@ -138,7 +148,7 @@ public class MainWindow extends JFrame {
 	public void setHandlingPersistenceBeer(HandlingPersistenceBeer handlingPersistenceBeer) {
 		this.handlingPersistenceBeer = handlingPersistenceBeer;
 	}
-	
+
 	public FindBeerWindow getFindBeerWindow() {
 		return findBeerWindow;
 	}
@@ -146,13 +156,45 @@ public class MainWindow extends JFrame {
 	public void setFindBeerWindow(FindBeerWindow findBeerWindow) {
 		this.findBeerWindow = findBeerWindow;
 	}
-	
+
 	public ShowBeerbyBrandWindow getShowBeerbyBrandWindow() {
 		return showBeerbyBrandWindow;
 	}
 
 	public void setShowBeerbyBrandWindow(ShowBeerbyBrandWindow showBeerbyBrandWindow) {
 		this.showBeerbyBrandWindow = showBeerbyBrandWindow;
+	}
+
+	public HandlingPersistenceSalesOfBeer getHandlingPersistenceSalesOfBeer() {
+		return handlingPersistenceSalesOfBeer;
+	}
+
+	public void setHandlingPersistenceSalesOfBeer(HandlingPersistenceSalesOfBeer handlingPersistenceSalesOfBeer) {
+		this.handlingPersistenceSalesOfBeer = handlingPersistenceSalesOfBeer;
+	}
+
+	public AddSalesOfBeerWindow getAddSalesOfBeerWindow() {
+		return addSalesOfBeerWindow;
+	}
+
+	public void setAddSalesOfBeerWindow(AddSalesOfBeerWindow addSalesOfBeerWindow) {
+		this.addSalesOfBeerWindow = addSalesOfBeerWindow;
+	}
+
+	public ChangeUserComponents getChangeUserComponents() {
+		return changeUserComponents;
+	}
+
+	public void setChangeUserComponents(ChangeUserComponents changeUserComponents) {
+		this.changeUserComponents = changeUserComponents;
+	}
+
+	public HandlingKeyEventsMainWindow getHandlingKeyEventsMainWindow() {
+		return handlingKeyEventsMainWindow;
+	}
+
+	public void setHandlingKeyEventsMainWindow(HandlingKeyEventsMainWindow handlingKeyEventsMainWindow) {
+		this.handlingKeyEventsMainWindow = handlingKeyEventsMainWindow;
 	}
 
 	public static void main(String[] args) {

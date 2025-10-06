@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class PanelRightRecoverPasswordWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -38,7 +39,6 @@ public class PanelRightRecoverPasswordWindow extends JPanel {
 		this.add(lbTitle);
 		this.add(lblUserName);
 		this.add(inputUserName);
-		//this.add(panelSeparator1);
 		this.add(lblPassword);
 		this.add(inputnewPassword);
 		this.add(lblConfirmPassword);
@@ -68,13 +68,17 @@ public class PanelRightRecoverPasswordWindow extends JPanel {
 		this.inputnewPassword = new StyledTextField(Boolean.TRUE);
 		this.lblConfirmPassword = new JLabel("Confirme su nueva contraseña");
 		this.inputConfirmnewPassword = new StyledTextField(Boolean.TRUE);
+		
 		this.btnAcept = new JButton("Aceptar");
-		this.btnAcept.setBackground(GUIUtils.getPrincipalcolor());
-		this.btnAcept.setForeground(Color.WHITE);
 		this.btnAcept.setFocusable(false);
+		this.btnAcept.setBorder(new LineBorder(GUIUtils.getPrincipalColor()));
+		this.btnAcept.setBackground(GUIUtils.getPrincipalColor());
 		this.btnAcept.setActionCommand(HandlingEventsLoginWindow.VALIDATE_FORGET_PASSWORD);
 		this.btnAcept.addActionListener(this.loginWindow.getHandlingEventsLoginWindow());
+		
 		this.btnBack = new JButton("Volver atras");
+		this.btnBack.setBorderPainted(false);
+		this.btnBack.setContentAreaFilled(false);
 		this.btnBack.setActionCommand(HandlingEventsLoginWindow.GET_BACK);
 		this.btnBack.addActionListener(this.loginWindow.getHandlingEventsLoginWindow());
 		

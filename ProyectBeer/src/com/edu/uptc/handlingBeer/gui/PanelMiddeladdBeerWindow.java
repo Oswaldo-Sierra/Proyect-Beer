@@ -8,12 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.edu.uptc.handlingBeer.enums.ETypeFile;
-
 public class PanelMiddeladdBeerWindow extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	/** Etiquetas para que el usuario sepa que debe ingresar*/
+
+	/** Etiquetas para que el usuario sepa que debe ingresar */
 	private JLabel jlbrand;
 	private JLabel jltype;
 	private JLabel jlABV;
@@ -23,7 +21,7 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 	private JLabel jlQuantity;
 
 	private JComboBox<String> comboBoxBrands;
-	//private StyledTextField inptbrand;
+	// private StyledTextField inptbrand;
 	private JComboBox<String> comboBoxType;
 	private StyledTextField inptABV;
 	private JComboBox<String> comboBoxIBU;
@@ -52,7 +50,7 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 		this.add(inptPrice);
 		this.add(jlQuantity);
 		this.add(inptQuantity);
-		
+
 	}
 
 	private void initComponets() {
@@ -63,15 +61,15 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 
 	private void initializeComponents() {
 		this.jlbrand = new JLabel("Marca de la cerveza");
-		String[] brands = {"Poker","Aguilla" ,"Costeña" ,"Corona","Guinness","Budweiser"};
+		String[] brands = { "Poker", "Aguilla", "Costeña", "Corona", "Guinness", "Budweiser" };
 		this.comboBoxBrands = new JComboBox<String>(brands);
 		this.jltype = new JLabel("Tipo");
-		String[] types = {"Lager","Pilsner" ,"Stout"};
+		String[] types = { "Lager", "Pilsner", "Stout" };
 		this.comboBoxType = new JComboBox<>(types);
 		this.jlABV = new JLabel("Grado de alcohol por volumen");
 		this.inptABV = new StyledTextField(Boolean.FALSE);
 		this.jlIBU = new JLabel("Amargor de la cerveza");
-		String[] IBU = {"muy baja","baja" ,"media" ,"alta","muy alta"};
+		String[] IBU = { "muy baja", "baja", "media", "alta", "muy alta" };
 		this.comboBoxIBU = new JComboBox<String>(IBU);
 		this.jlProvider = new JLabel("Provedor");
 		this.inptProvider = new StyledTextField(Boolean.FALSE);
@@ -79,10 +77,8 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 		this.inptPrice = new StyledTextField(Boolean.FALSE);
 		this.jlQuantity = new JLabel("Cantidad ingresada");
 		this.inptQuantity = new StyledTextField(Boolean.FALSE);
-		
-	}
-	
 
+	}
 
 	private void setUpScreen() {
 		setLayout(new GridLayout(14, 1));
@@ -155,7 +151,6 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 		this.comboBoxBrands = comboBoxBrands;
 	}
 
-
 	public JComboBox<String> getComboBoxType() {
 		return comboBoxType;
 	}
@@ -203,9 +198,5 @@ public class PanelMiddeladdBeerWindow extends JPanel {
 	public void setInptQuantity(StyledTextField inptQuantity) {
 		this.inptQuantity = inptQuantity;
 	}
-	
-	
-
-	
 
 }

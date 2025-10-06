@@ -3,45 +3,45 @@
 <Beer>
 	<SerialNumbre>1</SerialNumbre>
 	<Brand>Poker</Brand>
-	<Type>Lager</Type>
+	<Type>Large</Type>
 	<ABV>4,8</ABV>
 	<IBU>Bajo</IBU>
 	<Provider>Bavaria</Provider>
 	<Price>2000</Price>
-	<Quantity>20</Quantity> 
+	<Quantity>100</Quantity> 
 
 </Beer>
 <Beer>
-	<SerialNumbre>3</SerialNumbre>
-	<Brand>Guinnes</Brand>
-	<Type>Lager</Type>
+	<SerialNumbre>2</SerialNumbre>
+	<Brand>Aguila</Brand>
+	<Type>Large</Type>
 	<ABV>4,8</ABV>
-	<IBU>Bajo</IBU>
-	<Provider>Bavaria</Provider>
+	<IBU>Hola</IBU>
+	<Provider>BC</Provider>
 	<Price>2000</Price>
 	<Quantity>20</Quantity> 
 
 </Beer>
 <Beer>
 	<SerialNumbre>4</SerialNumbre>
-	<Brand>Corona</Brand>
-	<Type>Stout</Type>
-	<ABV>4,5</ABV>
-	<IBU>Media</IBU>
-	<Provider>su mama</Provider>
-	<Price>123</Price>
-	<Quantity>20</Quantity> 
+	<Brand>Poker</Brand>
+	<Type>Large</Type>
+	<ABV>Hola</ABV>
+	<IBU>muy baja</IBU>
+	<Provider>hola</Provider>
+	<Price>2000</Price>
+	<Quantity>10</Quantity> 
 
 </Beer>
 <Beer>
 	<SerialNumbre>5</SerialNumbre>
-	<Brand>Budweiser</Brand>
+	<Brand>Poker</Brand>
 	<Type>Large</Type>
-	<ABV>4,4</ABV>
-	<IBU>Media</IBU>
-	<Provider>no se</Provider>
+	<ABV>4,8</ABV>
+	<IBU>Bajo</IBU>
+	<Provider>Bavaria</Provider>
 	<Price>2000</Price>
-	<Quantity>200</Quantity> 
+	<Quantity>100</Quantity> 
 
 </Beer>
 </XML>

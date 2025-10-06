@@ -59,8 +59,9 @@ public class HandlingEventsLoginWindow implements ActionListener {
 	 * Valida las credenciales de inicio de sesión
 	 */
 	private void validateLogin() {
-		String username = loginWindow.getPanelRightLoginWindow().getInputUserName().getText();
-		String password = loginWindow.getPanelRightLoginWindow().getInputPassword().getText();
+		InfoSesion.clear();
+		String username = loginWindow.getPanelRightLoginWindow().getInputUserName().getTextValue();
+		String password = loginWindow.getPanelRightLoginWindow().getInputPassword().getTextValue();
 
 		if (username.isEmpty() || password.isEmpty()) {
 			showError(loginWindow.getPanelRightLoginWindow().getLblMessageError1(),
@@ -71,6 +72,8 @@ public class HandlingEventsLoginWindow implements ActionListener {
 		if (Boolean.TRUE.equals(persistenceUser.findUserByUsernamePassword(username, password))) {
 			Window ventana = SwingUtilities.getWindowAncestor(loginWindow.getPanelRightLoginWindow());
 			if (ventana != null) {
+				InfoSesion.setUserName(username);
+				InfoSesion.setPasswordUser(password);
 				ventana.setVisible(false);
 				loginWindow.getMainWindow().setVisible(true);
 			}
@@ -84,9 +87,9 @@ public class HandlingEventsLoginWindow implements ActionListener {
 	 * Valida el registro de un nuevo usuario
 	 */
 	private void validateSignUp() {
-		String username = this.loginWindow.getPanelRightSignuUpWindow().getInputUserName().getText();
-		String password = this.loginWindow.getPanelRightSignuUpWindow().getInputPassword().getText();
-		String confirmPassword = loginWindow.getPanelRightSignuUpWindow().getInputConfirmPassword().getText();
+		String username = this.loginWindow.getPanelRightSignuUpWindow().getInputUserName().getTextValue();
+		String password = this.loginWindow.getPanelRightSignuUpWindow().getInputPassword().getTextValue();
+		String confirmPassword = loginWindow.getPanelRightSignuUpWindow().getInputConfirmPassword().getTextValue();
 
 		if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(),
@@ -109,9 +112,12 @@ public class HandlingEventsLoginWindow implements ActionListener {
 		Window ventana = SwingUtilities.getWindowAncestor(this.loginWindow.getPanelRightSignuUpWindow());
 		if (ventana != null) {
 			ventana.setVisible(false);
+
 			User user = new User(username, password);
 			persistenceUser.addUser(user);
 			persistenceUser.dumpFile(ETypeFile.SER);
+			InfoSesion.setUserName(username);
+			InfoSesion.setPasswordUser(password);
 			loginWindow.getMainWindow().setVisible(true);
 		}
 	}
@@ -121,10 +127,10 @@ public class HandlingEventsLoginWindow implements ActionListener {
 	 */
 
 	private void validateForgetPassword() {
-		String username = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputUserName().getText();
-		String newPassword = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputnewPassword().getText();
+		String username = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputUserName().getTextValue();
+		String newPassword = this.loginWindow.getPanelRightRecoverPasswordWindow().getInputnewPassword().getTextValue();
 		String confirmNewPassword = loginWindow.getPanelRightRecoverPasswordWindow().getInputConfirmNewPassword()
-				.getText();
+				.getTextValue();
 
 		if (username.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty()) {
 			showError(this.loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError(),
@@ -148,6 +154,8 @@ public class HandlingEventsLoginWindow implements ActionListener {
 						break;
 					}
 				}
+				InfoSesion.setUserName(username);
+				InfoSesion.setPasswordUser(newPassword);
 				this.persistenceUser.dumpFile(ETypeFile.SER);
 				this.loginWindow.getMainWindow().setVisible(true);
 			}

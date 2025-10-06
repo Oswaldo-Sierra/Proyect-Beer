@@ -41,7 +41,7 @@ public class SalesOfBeer implements Serializable {
 	private String customerName;
 	
 	/** Constante para parsear la fecha*/
-	private  static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	public  static  final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public SalesOfBeer(int salesID, int numberSerialOfBeer, int numberOfBeersSold, double priceTotal, String dateOfSale,
 			String userName, String customerName) {
@@ -53,6 +53,8 @@ public class SalesOfBeer implements Serializable {
 		this.userName = userName;
 		this.customerName = customerName;
 	}
+	
+	public SalesOfBeer() {}
 
 	public int getSalesID() {
 		return salesID;
@@ -87,7 +89,11 @@ public class SalesOfBeer implements Serializable {
 	}
 
 	/**Getters y setters parseados*/
-	public LocalDate getDateOfSale() {
+	public String getDateOfSale() {
+		return dateOfSale;
+	}
+	
+	public LocalDate getDateOfSaleL() {
 		return LocalDate.parse(dateOfSale,formatter);
 	}
 

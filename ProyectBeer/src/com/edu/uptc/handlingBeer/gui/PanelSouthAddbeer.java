@@ -33,9 +33,13 @@ public class PanelSouthAddbeer extends JPanel {
 
 	private void initializeComponents() {
 		this.btnBack = new JButton("Volver atras");
+		this.btnBack.setBackground(GUIUtils.getPrincipalColor());
 		this.btnBack.setActionCommand(HandlingEventsAddWindow.GET_BACK);
+		this.btnBack.setFocusable(false);
 		this.btnBack.addActionListener(new HandlingEventsAddWindow(this.mainWindow));
 		this.btnAcept = new JButton("Aceptar");
+		this.btnAcept.setBackground(GUIUtils.getPrincipalColor());
+		this.btnAcept.setFocusable(false);
 		this.btnAcept.setActionCommand(HandlingEventsAddWindow.ADD_BEER);
 		this.btnAcept.addActionListener(new HandlingEventsAddWindow(this.mainWindow));
 

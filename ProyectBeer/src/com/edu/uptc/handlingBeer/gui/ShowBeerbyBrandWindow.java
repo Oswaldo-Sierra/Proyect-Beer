@@ -81,9 +81,13 @@ public class ShowBeerbyBrandWindow extends JFrame{
 		this.comboBoxBrands = new JComboBox<String>(brands);
 		/** Componentes panel sur*/
 		this.btnback = new JButton("Volver");
+		this.btnback.setBackground(GUIUtils.getPrincipalColor());
+		this.btnback.setFocusable(false);
 		btnback.setActionCommand(HandlingEventsMainWindow.HIDE_WINDOW_FIND_BEER);
 		btnback.addActionListener(this.mainWindow.getHandlingEventsMainWindow());
 		this.btnSearch = new JButton("Buscar");
+		this.btnSearch.setBackground(GUIUtils.getPrincipalColor());
+		this.btnSearch.setFocusable(false);
 		this.btnSearch.setActionCommand(HandlingEventsMainWindow.FIND_BEER_BY_BRAND);
 		this.btnSearch.addActionListener(this.mainWindow.getHandlingEventsMainWindow());
 	}

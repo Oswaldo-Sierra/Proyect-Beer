@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 public class LoginWindow extends JFrame {
-	
 
 	private static final long serialVersionUID = 1L;
 	private PanelLeftLoginWindow leftLogginWindow;
@@ -43,7 +42,6 @@ public class LoginWindow extends JFrame {
 		this.panelRightLoginWindow = new PanelRightLoginWindow(this);
 		this.panelRightSignuUpWindow = new PanelRightSignuUpWindow(this);
 		this.panelRightRecoverPasswordWindow = new PanelRightRecoverPasswordWindow(this);
-
 	}
 
 	private void setUpScreen() {
@@ -55,7 +53,7 @@ public class LoginWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setLayout(new BorderLayout());
-		
+
 		setResizable(false);
 
 	}
@@ -75,8 +73,7 @@ public class LoginWindow extends JFrame {
 	public void setRithLogginWindow(PanelRightLoginWindow rithLogginWindow) {
 		this.panelRightLoginWindow = rithLogginWindow;
 	}
-	
-	
+
 	public PanelRightLoginWindow getPanelRightLoginWindow() {
 		return panelRightLoginWindow;
 	}
@@ -92,11 +89,11 @@ public class LoginWindow extends JFrame {
 	public void setPanelRightSignuUpWindow(PanelRightSignuUpWindow panelRightSignuUpWindow) {
 		this.panelRightSignuUpWindow = panelRightSignuUpWindow;
 	}
-	
+
 	public HandlingEventsLoginWindow getHandlingEventsLoginWindow() {
 		return handlingEventsLoginWindow;
 	}
-	
+
 	public PanelRightRecoverPasswordWindow getPanelRightRecoverPasswordWindow() {
 		return panelRightRecoverPasswordWindow;
 	}
@@ -105,11 +102,9 @@ public class LoginWindow extends JFrame {
 		this.panelRightRecoverPasswordWindow = panelRightRecoverPasswordWindow;
 	}
 
-
 	public void setHandlingEventsLoginWindow(HandlingEventsLoginWindow handlingEventsLoginWindow) {
 		this.handlingEventsLoginWindow = handlingEventsLoginWindow;
 	}
-	
 
 	public MainWindow getMainWindow() {
 		return mainWindow;
@@ -117,6 +112,10 @@ public class LoginWindow extends JFrame {
 
 	public void setMainWindow(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public static void main(String[] args) {

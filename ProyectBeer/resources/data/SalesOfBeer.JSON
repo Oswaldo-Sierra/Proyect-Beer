@@ -9,7 +9,7 @@
     "customerName": "Jairo"
   },
   {
-    "salesID": 2,
+    "salesID": 3,
     "numberSerialOfBeer": 2,
     "numberOfBeersSold": 20,
     "priceTotal": 100000.0,
@@ -18,12 +18,48 @@
     "customerName": "Jairo"
   },
   {
-    "salesID": 3,
-    "numberSerialOfBeer": 2,
-    "numberOfBeersSold": 20,
-    "priceTotal": 100000.0,
-    "dateOfSale": "09/09/2025",
+    "salesID": 4,
+    "numberSerialOfBeer": 3,
+    "numberOfBeersSold": 19,
+    "priceTotal": 38000.0,
+    "dateOfSale": "01/10/2025",
+    "userName": "pepito",
+    "customerName": "Juan"
+  },
+  {
+    "salesID": 5,
+    "numberSerialOfBeer": 3,
+    "numberOfBeersSold": 1,
+    "priceTotal": 2000.0,
+    "dateOfSale": "01/10/2025",
+    "userName": "pepito",
+    "customerName": "juan"
+  },
+  {
+    "salesID": 6,
+    "numberSerialOfBeer": 3,
+    "numberOfBeersSold": 19,
+    "priceTotal": 38000.0,
+    "dateOfSale": "01/10/2025",
+    "userName": "pepito",
+    "customerName": "Juan"
+  },
+  {
+    "salesID": 7,
+    "numberSerialOfBeer": 1,
+    "numberOfBeersSold": 10,
+    "priceTotal": 20000.0,
+    "dateOfSale": "01/10/2025",
+    "userName": "pepito",
+    "customerName": "Juan"
+  },
+  {
+    "salesID": 8,
+    "numberSerialOfBeer": 3,
+    "numberOfBeersSold": 1,
+    "priceTotal": 2000.0,
+    "dateOfSale": "01/10/2025",
     "userName": "Juan",
-    "customerName": "Jairo"
+    "customerName": "Juan"
   }
 ]

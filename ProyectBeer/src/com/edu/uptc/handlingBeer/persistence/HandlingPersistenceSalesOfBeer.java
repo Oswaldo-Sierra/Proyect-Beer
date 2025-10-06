@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -21,6 +24,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 import com.edu.uptc.handlingBeer.constants.CommonConstants;
+import com.edu.uptc.handlingBeer.constants.CommonConstantsIndexs;
 import com.edu.uptc.handlingBeer.enums.ETypeFile;
 import com.edu.uptc.handlingBeer.interfaces.IActionsFile;
 import com.edu.uptc.handlingBeer.model.SalesOfBeer;
@@ -30,6 +34,7 @@ import com.google.gson.GsonBuilder;
 public class HandlingPersistenceSalesOfBeer extends FilePlain implements IActionsFile {
 
 	private List<SalesOfBeer> listSalesOfBeer;
+	public static String ID_SALE_SELECTED = "";
 
 	public HandlingPersistenceSalesOfBeer() {
 		this.listSalesOfBeer = new ArrayList<>();
@@ -46,6 +51,124 @@ public class HandlingPersistenceSalesOfBeer extends FilePlain implements IAction
 
 	public boolean findUserBySalesID(int id) {
 		return listSalesOfBeer.stream().anyMatch(s -> s.getSalesID() == id);
+	}
+
+	public Boolean deleteBeer(int salesID) {
+		int index = -1;
+		for (int i = 0; i < this.listSalesOfBeer.size(); i++) {
+			if (this.listSalesOfBeer.get(i).getSalesID() == salesID) {
+				index = i;
+			}
+		}
+		if (index == -1) {
+			return false;
+		}
+		this.listSalesOfBeer.remove(index);
+		return true;
+	}
+
+	public Boolean updateSale(SalesOfBeer newSale) {
+		SalesOfBeer actualSale = new SalesOfBeer();
+		int index = -1;
+		for (int i = 0; i < this.listSalesOfBeer.size(); i++) {
+			if (this.listSalesOfBeer.get(i).getSalesID() == newSale.getSalesID()) {
+				actualSale = this.listSalesOfBeer.get(i);
+				index = i;
+			}
+		}
+
+		if (index == -1) {
+			return false;
+		}
+
+		actualSale.setNumberOfBeersSold(newSale.getNumberOfBeersSold());
+		actualSale.setPriceTotal(newSale.getPriceTotal());
+		actualSale.setDateOfSale(LocalDate.parse(newSale.getDateOfSale(), SalesOfBeer.formatter));
+		actualSale.setUserName(newSale.getUserName());
+		actualSale.setCustomerName(newSale.getCustomerName());
+		this.listSalesOfBeer.set(index, actualSale);
+		return true;
+
+	}
+
+	public SalesOfBeer findSalesByIndex(int index, String value) {
+		switch (index) {
+		case CommonConstantsIndexs.INDEX_SALESID:
+			try {
+				int salesID = Integer.parseInt(value);
+				for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+					if (salesOfBeer.getSalesID() == salesID) {
+						return salesOfBeer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "El Id de la venta debe ser un valor numérico.");
+			}
+			break;
+		case CommonConstantsIndexs.INDEX_NUMBERBEERSOLD:
+			try {
+				int numberBeerSold = Integer.parseInt(value);
+				for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+					if (salesOfBeer.getNumberOfBeersSold() == numberBeerSold) {
+						return salesOfBeer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "El numero cervezas vendidas debe ser un valor numérico.");
+			}
+			break;
+		case CommonConstantsIndexs.INDEX_PRICE:
+			try {
+				int price = Integer.parseInt(value);
+				for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+					if (salesOfBeer.getPriceTotal() == price) {
+						return salesOfBeer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "El precio de la  venta debe ser un valor numérico.");
+			}
+			break;
+		case CommonConstantsIndexs.INDEX_DATE:
+			try {
+				LocalDate date = LocalDate.parse(value, SalesOfBeer.formatter);
+				for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+					if (salesOfBeer.getDateOfSaleL().equals(date)) {
+						return salesOfBeer;
+					}
+				}
+			} catch (DateTimeParseException e) {
+				JOptionPane.showMessageDialog(null, "La fecha de la venta debe ser en el formato dado.");
+			}
+			break;
+		case CommonConstantsIndexs.INDEX_USERN:
+			for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+				if (salesOfBeer.getUserName().equals(value)) {
+					return salesOfBeer;
+				}
+			}
+			break;
+		case CommonConstantsIndexs.INDEX_CUSTOMERN:
+			for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+				if (salesOfBeer.getCustomerName().equals(value)) {
+					return salesOfBeer;
+				}
+			}
+			break;
+		}
+		return null;
+	}
+
+
+
+	public int generateIDSale() {
+		int lastID = 0;
+		for (SalesOfBeer salesOfBeer : this.listSalesOfBeer) {
+			if (salesOfBeer.getSalesID() > lastID) {
+				lastID = salesOfBeer.getSalesID();
+			}
+		}
+		return lastID + 1;
 	}
 
 	@Override
@@ -157,9 +280,9 @@ public class HandlingPersistenceSalesOfBeer extends FilePlain implements IAction
 				String userName = tokens.nextToken();
 				String customerName = tokens.nextToken();
 
-				this.listSalesOfBeer
-						.add(new SalesOfBeer(Integer.parseInt(salesID), Integer.parseInt(numberSerialOfBeer),
-								Integer.parseInt(numberofBeersSold), Double.parseDouble(priceTotal), dateofSale, userName, customerName));
+				this.listSalesOfBeer.add(new SalesOfBeer(Integer.parseInt(salesID),
+						Integer.parseInt(numberSerialOfBeer), Integer.parseInt(numberofBeersSold),
+						Double.parseDouble(priceTotal), dateofSale, userName, customerName));
 			}
 		});
 	}
@@ -231,17 +354,18 @@ public class HandlingPersistenceSalesOfBeer extends FilePlain implements IAction
 			NodeList list = document.getElementsByTagName(CommonConstants.Name_Tag_SalesOFBeer);
 			for (int i = 0; i < list.getLength(); i++) {
 				String SalesID = document.getElementsByTagName("SalesID").item(i).getTextContent();
-				String numberSerialOfBeer = document.getElementsByTagName("NumberSerialOfBeer").item(i).getTextContent();
+				String numberSerialOfBeer = document.getElementsByTagName("NumberSerialOfBeer").item(i)
+						.getTextContent();
 				String numberofBeersSold = document.getElementsByTagName("NumberofBeersSold").item(i).getTextContent();
 				String priceTotal = document.getElementsByTagName("PriceTotal").item(i).getTextContent();
 				String dateofSale = document.getElementsByTagName("DateOfSale").item(i).getTextContent();
 				String userName = document.getElementsByTagName("UserName").item(i).getTextContent();
 				String customerName = document.getElementsByTagName("CustomerName").item(i).getTextContent();
 
-				this.listSalesOfBeer
-				.add(new SalesOfBeer(Integer.parseInt(SalesID), Integer.parseInt(numberSerialOfBeer),
-						Integer.parseInt(numberofBeersSold), Double.parseDouble(priceTotal), dateofSale, userName, customerName));
-				
+				this.listSalesOfBeer.add(new SalesOfBeer(Integer.parseInt(SalesID),
+						Integer.parseInt(numberSerialOfBeer), Integer.parseInt(numberofBeersSold),
+						Double.parseDouble(priceTotal), dateofSale, userName, customerName));
+
 			}
 
 		} catch (Exception e) {

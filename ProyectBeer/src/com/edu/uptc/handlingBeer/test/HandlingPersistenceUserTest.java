@@ -33,7 +33,7 @@ private HandlingPersistenceUser hPU = new HandlingPersistenceUser();
 	public void scenerieOne() {
 		/** Simulacion de que la persona ingrese datos */
 		User user = new User("Juan", "123");
-		User user2 = new User("harold", "0987");
+		User user2 = new User("harold", "123");
 		User user3 = new User("Juan", "123");
 
 		/** Se guarda en la lista */
@@ -56,6 +56,8 @@ private HandlingPersistenceUser hPU = new HandlingPersistenceUser();
 
 		assertEquals("Juan", 
 				this.hPU.getListusers().get(0).getNameUser());
+		assertEquals(2,
+				this.hPU.getListusers().size());
 		//assertNotNull(this.hPB.getListBeer().get(3));
 		//assertEquals("Corona",this.hPB.getListBeer().get(1).getBrand());
 	}

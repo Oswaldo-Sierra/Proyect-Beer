@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -64,6 +63,45 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return null;
 	}
 
+	public String[] comboBoxValues() {
+		ArrayList<String> values = new ArrayList<>();
+		;
+		String val = null;
+		for (Beer beer : this.listBeer) {
+			if (!(beer.getQuantity() == 0)) {
+				val = beer.getBrand() + "-" + beer.getSerialNumber();
+				values.add(val);
+			}
+		}
+
+		if (values.isEmpty()) {
+			return null;
+		}
+
+		return values.toArray(new String[0]);
+	}
+
+	public int priceBeer(int serial) {
+		Beer beer = this.findBeerBySerialNumber(serial);
+		if (beer != null) {
+			return beer.getPrice();
+		}
+		return 0;
+	}
+
+	public boolean numberSoldBeer(int serial, int numberSold) {
+		Beer beer = this.findBeerBySerialNumber(serial);
+		if (beer != null) {
+			int subtract = beer.getQuantity() - numberSold;
+			if (subtract >= 0) {
+				beer.setQuantity(subtract);
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+
 	/** metodo encargado de eliminar una cerveza */
 	public Boolean deleteBeer(int serialNumber) {
 		int index = -1;
@@ -108,111 +146,110 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 
 	/** Metodo que busca una cerveza por el index del comboBox */
 	public Beer findBeerbyIndex(int index, String value) {
-	    switch (index) {
-	    case CommonConstants.INDEX_SSERIAL_NUMBER:
-	        try {
-	            int serial = Integer.parseInt(value);
-	            for (Beer beer : this.listBeer) {
-	                if (beer.getSerialNumber() == serial) {
-	                    return beer;
-	                }
-	            }
-	        } catch (NumberFormatException e) {
-	            JOptionPane.showMessageDialog(null, "El número de serie debe ser un valor numérico.");
-	        }
-	        break;
+		switch (index) {
+		case CommonConstants.INDEX_SSERIAL_NUMBER:
+			try {
+				int serial = Integer.parseInt(value);
+				for (Beer beer : this.listBeer) {
+					if (beer.getSerialNumber() == serial) {
+						return beer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "El número de serie debe ser un valor numérico.");
+			}
+			break;
 
-	    case CommonConstants.INDEX_BRAND:
-	        for (Beer beer : this.listBeer) {
-	            if (beer.getBrand().equalsIgnoreCase(value)) {
-	                return beer;
-	            }
-	        }
-	        break;
+		case CommonConstants.INDEX_BRAND:
+			for (Beer beer : this.listBeer) {
+				if (beer.getBrand().equalsIgnoreCase(value)) {
+					return beer;
+				}
+			}
+			break;
 
-	    case CommonConstants.INDEX_TYPE:
-	        for (Beer beer : this.listBeer) {
-	            if (beer.getType().equalsIgnoreCase(value)) {
-	                return beer;
-	            }
-	        }
-	        break;
+		case CommonConstants.INDEX_TYPE:
+			for (Beer beer : this.listBeer) {
+				if (beer.getType().equalsIgnoreCase(value)) {
+					return beer;
+				}
+			}
+			break;
 
-	    case CommonConstants.INDEX_ABV:
-	        for (Beer beer : this.listBeer) {
-	            if (beer.getABV().equalsIgnoreCase(value)) {
-	                return beer;
-	            }
-	        }
-	        break;
+		case CommonConstants.INDEX_ABV:
+			for (Beer beer : this.listBeer) {
+				if (beer.getABV().equalsIgnoreCase(value)) {
+					return beer;
+				}
+			}
+			break;
 
-	    case CommonConstants.INDEX_IBU:
-	        for (Beer beer : this.listBeer) {
-	            if (beer.getIBU().equalsIgnoreCase(value)) {
-	                return beer;
-	            }
-	        }
-	        break;
+		case CommonConstants.INDEX_IBU:
+			for (Beer beer : this.listBeer) {
+				if (beer.getIBU().equalsIgnoreCase(value)) {
+					return beer;
+				}
+			}
+			break;
 
-	    case CommonConstants.INDEX_PROVIDER:
-	        for (Beer beer : this.listBeer) {
-	            if (beer.getProvider().equalsIgnoreCase(value)) {
-	                return beer;
-	            }
-	        }
-	        break;
+		case CommonConstants.INDEX_PROVIDER:
+			for (Beer beer : this.listBeer) {
+				if (beer.getProvider().equalsIgnoreCase(value)) {
+					return beer;
+				}
+			}
+			break;
 
-	    case CommonConstants.INDEX_PRICE:
-	        try {
-	            int price = Integer.parseInt(value);
-	            for (Beer beer : this.listBeer) {
-	                if (beer.getPrice() == price) {
-	                    return beer;
-	                }
-	            }
-	        } catch (NumberFormatException e) {
-	            JOptionPane.showMessageDialog(null, "El precio debe ser un valor numérico.");
-	        }
-	        break;
+		case CommonConstants.INDEX_PRICE:
+			try {
+				int price = Integer.parseInt(value);
+				for (Beer beer : this.listBeer) {
+					if (beer.getPrice() == price) {
+						return beer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "El precio debe ser un valor numérico.");
+			}
+			break;
 
-	    case CommonConstants.INDEX_QUANTITY:
-	        try {
-	            int qty = Integer.parseInt(value);
-	            for (Beer beer : this.listBeer) {
-	                if (beer.getQuantity() == qty) {
-	                    return beer;
-	                }
-	            }
-	        } catch (NumberFormatException e) {
-	            JOptionPane.showMessageDialog(null, "La cantidad debe ser un valor numérico.");
-	        }
-	        break;
-	    }
-	    return null;
+		case CommonConstants.INDEX_QUANTITY:
+			try {
+				int qty = Integer.parseInt(value);
+				for (Beer beer : this.listBeer) {
+					if (beer.getQuantity() == qty) {
+						return beer;
+					}
+				}
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "La cantidad debe ser un valor numérico.");
+			}
+			break;
+		}
+		return null;
 	}
-
 
 	public List<Beer> findBeersByBrand(int index) {
 		List<Beer> listAux = new ArrayList<>();
 		String brand = "";
 
 		switch (index) {
-		case CommonConstants.INDEX_POKER:
+		case CommonConstantsIndexs.INDEX_POKER:
 			brand = "Poker";
 			break;
-		case CommonConstants.INDEX_AGUILLA:
+		case CommonConstantsIndexs.INDEX_AGUILLA:
 			brand = "Aguila";
 			break;
-		case CommonConstants.INDEX_COSTEÑA:
+		case CommonConstantsIndexs.INDEX_COSTEÑA:
 			brand = "Costeña";
 			break;
-		case CommonConstants.INDEX_CORONA:
+		case CommonConstantsIndexs.INDEX_CORONA:
 			brand = "Corona";
 			break;
-		case CommonConstants.INDEX_GUINNES:
+		case CommonConstantsIndexs.INDEX_GUINNES:
 			brand = "Guinness";
 			break;
-		case CommonConstants.INDEX_BUDWEISER:
+		case CommonConstantsIndexs.INDEX_BUDWEISER:
 			brand = "Budweiser";
 			break;
 		}
@@ -226,27 +263,27 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return listAux;
 
 	}
-	
+
 	public String findBrandbyIndex(int index) {
 		String brand = "";
 
 		switch (index) {
-		case CommonConstants.INDEX_POKER:
+		case CommonConstantsIndexs.INDEX_POKER:
 			brand = "Poker";
 			break;
-		case CommonConstants.INDEX_AGUILLA:
+		case CommonConstantsIndexs.INDEX_AGUILLA:
 			brand = "Aguila";
 			break;
-		case CommonConstants.INDEX_COSTEÑA:
+		case CommonConstantsIndexs.INDEX_COSTEÑA:
 			brand = "Costeña";
 			break;
-		case CommonConstants.INDEX_CORONA:
+		case CommonConstantsIndexs.INDEX_CORONA:
 			brand = "Corona";
 			break;
-		case CommonConstants.INDEX_GUINNES:
+		case CommonConstantsIndexs.INDEX_GUINNES:
 			brand = "Guinness";
 			break;
-		case CommonConstants.INDEX_BUDWEISER:
+		case CommonConstantsIndexs.INDEX_BUDWEISER:
 			brand = "Budweiser";
 			break;
 		}
@@ -254,7 +291,7 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return brand;
 
 	}
-	
+
 	public String findtypebyIndex(int index) {
 		String type = "";
 
@@ -273,7 +310,7 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return type;
 
 	}
-	
+
 	public String findyIBUIndex(int index) {
 		String IBU = "";
 
@@ -298,15 +335,15 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return IBU;
 
 	}
-	
+
 	public int generateSerialNumber() {
 		int lastSerial = 0;
-	    for (Beer beer : this.listBeer) {
-	        if (beer.getSerialNumber() > lastSerial) {
-	            lastSerial = beer.getSerialNumber();
-	        }
-	    }
-	    return lastSerial + 1;
+		for (Beer beer : this.listBeer) {
+			if (beer.getSerialNumber() > lastSerial) {
+				lastSerial = beer.getSerialNumber();
+			}
+		}
+		return lastSerial + 1;
 	}
 
 	/**
@@ -411,29 +448,31 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 	 * 
 	 * private String escape(String value) { if (value == null) return ""; return
 	 * value.replace("\\", "\\\\").replace("\"", "\\\""); }
-	 * 
-	 * 
-	 * 
-	 * private void loadFileJSON() { List<String> contentInLine = this.reader(
-	 * config.getPathFile().concat(config.getNameFileJSON())) .stream().filter(line
-	 * -> !line.equals("[") && !line.equals("]") &&
-	 * !line.equals(CommonConstants.BREAK_LINE) && !line.trim().isEmpty() &&
-	 * !line.trim().isBlank()) .collect(Collectors.toList()); for(String line:
-	 * contentInLine) { line = line.replace("{", "").replace("},", "").replace("}",
-	 * ""); StringTokenizer tokens = new StringTokenizer(line, ",");
-	 * 
-	 * while(tokens.hasMoreElements()){ String serialNumber =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); String brand =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); String type =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); String ABV =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); String IBU =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); String origin =
-	 * this.escapeValue(tokens.nextToken().split(":")[1]); this.listBeer.add(new
-	 * Beer(serialNumber, brand, type, ABV, IBU, origin)); } } }
-	 * 
-	 * private String escapeValue(String value) { return value.replace("\"", ""); }
-	 * 
 	 */
+
+//	private void loadFileJSON_1() {
+//		List<String> contentInLine = this.reader(config.getPathFile().concat(config.getNameFileJSON())).stream()
+//				.filter(line -> !line.equals("[") && !line.equals("]") && !line.equals(CommonConstants.BREAK_LINE)
+//						&& !line.trim().isEmpty() && !line.trim().isBlank())
+//				.collect(Collectors.toList());
+//		for (String line : contentInLine) {
+//			line = line.replace("{", "").replace("},", "").replace("}", "");
+//			StringTokenizer tokens = new StringTokenizer(line, ",");
+//
+//			while (tokens.hasMoreElements()) {
+//				String serialNumber = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				String brand = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				String type = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				String ABV = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				String IBU = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				String origin = this.escapeValue(tokens.nextToken().split(":")[1]);
+//				//this.listBeer.add(new Beer(serialNumber, brand, type, ABV, IBU, origin));
+//			}
+//		}
+//	}
+//	private String escapeValue(String value) {
+//		return value.replace("\"", "");
+//	}
 
 	/**
 	 * De aqui en adelante estaran los metodos de volcado y carga dependiendo el
@@ -481,7 +520,7 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 				String provider = tokens.nextToken();
 				String price = tokens.nextToken();
 				String quantity = tokens.nextToken();
-				
+
 				this.listBeer.add(new Beer(Integer.parseInt(serialNumber), brand, type, ABV, IBU, provider,
 						Integer.parseInt(price), Integer.parseInt(quantity)));
 			}
@@ -563,7 +602,7 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 				String provider = document.getElementsByTagName("Provider").item(i).getTextContent();
 				String price = document.getElementsByTagName("Price").item(i).getTextContent();
 				String quantity = document.getElementsByTagName("Quantity").item(i).getTextContent();
-				
+
 				this.listBeer.add(new Beer(Integer.parseInt(serialNumber), brand, type, ABV, IBU, provider,
 						Integer.parseInt(price), Integer.parseInt(quantity)));
 			}

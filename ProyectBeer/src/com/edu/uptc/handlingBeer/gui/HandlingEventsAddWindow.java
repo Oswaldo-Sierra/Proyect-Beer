@@ -42,13 +42,13 @@ public class HandlingEventsAddWindow implements ActionListener {
 			int index2 = this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxType()
 					.getSelectedIndex();
 			
-			int index3 = this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxIBU()
-					.getSelectedIndex();
+			String index3 = (String) this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxIBU()
+					.getSelectedItem();
 
 			int serialNumber = this.mainWindow.getHandlingPersistenceBeer().generateSerialNumber();
 			String brand = this.mainWindow.getHandlingPersistenceBeer().findBrandbyIndex(index1);
 			String type = this.mainWindow.getHandlingPersistenceBeer().findtypebyIndex(index2);
-			String iBU = this.mainWindow.getHandlingPersistenceBeer().findyIBUIndex(index3);
+			String iBU = index3;
 			String aBV = this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptABV()
 					.getTextValue();
 			String proveder = this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptProvider()
@@ -89,7 +89,14 @@ public class HandlingEventsAddWindow implements ActionListener {
 	}
 
 	private void clearDate() {
-
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxBrands().setSelectedIndex(0);
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxIBU().setSelectedIndex(0);
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getComboBoxType().setSelectedIndex(0);
+		
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptABV().setText("");
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptProvider().setText("");
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptPrice().setText("");
+		this.mainWindow.getAddBeerWindow().getPanelMiddeladdBeerWindow().getInptQuantity().setText("");
 	}
 
 	private void loadInfoTable(ETypeFile eTypeFile) {

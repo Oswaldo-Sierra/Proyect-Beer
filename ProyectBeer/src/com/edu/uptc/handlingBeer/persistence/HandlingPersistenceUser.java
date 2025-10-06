@@ -40,6 +40,43 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 		return listusers.stream().anyMatch(u -> u.getNameUser().equals(nameUser));
 	}
 
+	public User findUserByUser(String nameUser) {
+		return listusers.stream().filter(u -> u.getNameUser().equals(nameUser)).findFirst().orElse(null);
+	}
+
+	public boolean deleteUser(String userName) {
+		int index = -1;
+		for (int i = 0; i < this.listusers.size(); i++) {
+			if ((this.listusers.get(i).getNameUser().equals(userName))) {
+				index = i;
+			}
+		}
+		if (index == -1) {
+			return false;
+		}
+		this.listusers.remove(index);
+		return true;
+	}
+	
+	public boolean updateUsername(String oldUsername, String newUsername) {
+	    User user = this.findUserByUser(oldUsername);
+
+	    if (user != null && !this.findUserByUsername(newUsername)) {
+	        user.setNameUser(newUsername);
+	        return true;
+	    }
+	    return false; 
+	}
+
+    public boolean updatePassword(String username, String newPassword) {
+        User user = this.findUserByUser(username);
+        if (user != null) {
+            user.setPassword(newPassword);
+            return true;
+        }
+        return false;
+    }
+
 	/**
 	 * Metodo que se encarga de volcar la informacion registrada por el usuario
 	 * dependiendo del tipo de archivo plano.
@@ -95,5 +132,7 @@ public class HandlingPersistenceUser extends FilePlain implements IActionsFile {
 	public void setListusers(List<User> listusers) {
 		this.listusers = listusers;
 	}
+
+	
 
 }

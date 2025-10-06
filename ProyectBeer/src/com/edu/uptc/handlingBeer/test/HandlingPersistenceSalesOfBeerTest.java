@@ -47,8 +47,8 @@ class HandlingPersistenceSalesOfBeerTest {
 
 	private void info() {
 		/** Simulacion de que la persona ingrese datos */
-		SalesOfBeer salesOfBeer1 = new SalesOfBeer(001, 002, 20, 100000.0, "01/10/2025", "Juan", "Jairo");
-		SalesOfBeer salesOfBeer2 = new SalesOfBeer(001, 002, 20, 100000.0, "09/09/2025", "Juan", "Jairo");
+		SalesOfBeer salesOfBeer1 = new SalesOfBeer(001, 002, 20, 100000, "01/10/2025", "Juan", "Jairo");
+		SalesOfBeer salesOfBeer2 = new SalesOfBeer(001, 002, 20, 100000, "09/09/2025", "Juan", "Jairo");
 		SalesOfBeer salesOfBeer3 = new SalesOfBeer(002, 002, 20, 100000.0, "09/09/2025", "Juan", "Jairo");
 		SalesOfBeer salesOfBeer4 = new SalesOfBeer(003, 002, 20, 100000.0, "09/09/2025", "Juan", "Jairo");
 		/** Se guarda en la lista */

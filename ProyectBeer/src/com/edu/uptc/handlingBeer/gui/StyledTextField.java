@@ -11,9 +11,6 @@ public class StyledTextField extends JPasswordField {
 	private static final long serialVersionUID = 1L;
 	private Boolean passwordMode;
 	
-	private StyledTextField() {
-		
-	}
 	
 	public StyledTextField(Boolean passwordMode) {
 		this.passwordMode = passwordMode;

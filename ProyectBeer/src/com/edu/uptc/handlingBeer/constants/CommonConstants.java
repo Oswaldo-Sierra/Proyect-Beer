@@ -18,11 +18,6 @@ public class CommonConstants {
 	public static final int INDEX_QUANTITY = 7;
 	
 
-	public static final int INDEX_POKER = 0;
-	public static final int INDEX_AGUILLA = 1;
-	public static final int INDEX_COSTEÑA= 2;
-	public static final int INDEX_CORONA = 3;
-	public static final int INDEX_GUINNES = 4;
-	public static final int INDEX_BUDWEISER = 5;
+	
 	
 }

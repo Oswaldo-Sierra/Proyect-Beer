@@ -5,17 +5,7 @@
 	<NumberSerialOfBeer>2</NumberSerialOfBeer>
 	<NumberofBeersSold>20</NumberofBeersSold>
 	<PriceTotal>100000.0</PriceTotal>
-	<DateOfSale>2025-10-01</DateOfSale>
-	<UserName>Juan</UserName>
-	<CustomerName>Jairo</CustomerName> 
-
-</SalesOfBeers>
-<SalesOfBeers>
-	<SalesID>2</SalesID>
-	<NumberSerialOfBeer>2</NumberSerialOfBeer>
-	<NumberofBeersSold>20</NumberofBeersSold>
-	<PriceTotal>100000.0</PriceTotal>
-	<DateOfSale>2025-09-09</DateOfSale>
+	<DateOfSale>01/10/2025</DateOfSale>
 	<UserName>Juan</UserName>
 	<CustomerName>Jairo</CustomerName> 
 
@@ -25,9 +15,59 @@
 	<NumberSerialOfBeer>2</NumberSerialOfBeer>
 	<NumberofBeersSold>20</NumberofBeersSold>
 	<PriceTotal>100000.0</PriceTotal>
-	<DateOfSale>2025-09-09</DateOfSale>
+	<DateOfSale>09/09/2025</DateOfSale>
 	<UserName>Juan</UserName>
 	<CustomerName>Jairo</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>4</SalesID>
+	<NumberSerialOfBeer>3</NumberSerialOfBeer>
+	<NumberofBeersSold>19</NumberofBeersSold>
+	<PriceTotal>38000.0</PriceTotal>
+	<DateOfSale>01/10/2025</DateOfSale>
+	<UserName>pepito</UserName>
+	<CustomerName>Juan</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>5</SalesID>
+	<NumberSerialOfBeer>3</NumberSerialOfBeer>
+	<NumberofBeersSold>1</NumberofBeersSold>
+	<PriceTotal>2000.0</PriceTotal>
+	<DateOfSale>01/10/2025</DateOfSale>
+	<UserName>pepito</UserName>
+	<CustomerName>juan</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>6</SalesID>
+	<NumberSerialOfBeer>3</NumberSerialOfBeer>
+	<NumberofBeersSold>19</NumberofBeersSold>
+	<PriceTotal>38000.0</PriceTotal>
+	<DateOfSale>01/10/2025</DateOfSale>
+	<UserName>pepito</UserName>
+	<CustomerName>Juan</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>7</SalesID>
+	<NumberSerialOfBeer>1</NumberSerialOfBeer>
+	<NumberofBeersSold>10</NumberofBeersSold>
+	<PriceTotal>20000.0</PriceTotal>
+	<DateOfSale>01/10/2025</DateOfSale>
+	<UserName>pepito</UserName>
+	<CustomerName>Juan</CustomerName> 
+
+</SalesOfBeers>
+<SalesOfBeers>
+	<SalesID>8</SalesID>
+	<NumberSerialOfBeer>3</NumberSerialOfBeer>
+	<NumberofBeersSold>1</NumberofBeersSold>
+	<PriceTotal>2000.0</PriceTotal>
+	<DateOfSale>01/10/2025</DateOfSale>
+	<UserName>Juan</UserName>
+	<CustomerName>Juan</CustomerName> 
 
 </SalesOfBeers>
 </XML>

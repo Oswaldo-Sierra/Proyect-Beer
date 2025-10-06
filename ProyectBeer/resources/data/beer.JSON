@@ -2,41 +2,41 @@
   {
     "serialNumber": 1,
     "brand": "Poker",
-    "type": "Lager",
+    "type": "Large",
     "ABV": "4,8",
     "IBU": "Bajo",
     "provider": "Bavaria",
     "price": 2000,
-    "quantity": 20
+    "quantity": 100
   },
   {
-    "serialNumber": 3,
-    "brand": "Guinnes",
-    "type": "Lager",
+    "serialNumber": 2,
+    "brand": "Aguila",
+    "type": "Large",
     "ABV": "4,8",
-    "IBU": "Bajo",
-    "provider": "Bavaria",
+    "IBU": "Hola",
+    "provider": "BC",
     "price": 2000,
     "quantity": 20
   },
   {
     "serialNumber": 4,
-    "brand": "Corona",
-    "type": "Stout",
-    "ABV": "4,5",
-    "IBU": "Media",
-    "provider": "su mama",
-    "price": 123,
-    "quantity": 20
+    "brand": "Poker",
+    "type": "Large",
+    "ABV": "Hola",
+    "IBU": "muy baja",
+    "provider": "hola",
+    "price": 2000,
+    "quantity": 10
   },
   {
     "serialNumber": 5,
-    "brand": "Budweiser",
+    "brand": "Poker",
     "type": "Large",
-    "ABV": "4,4",
-    "IBU": "Media",
-    "provider": "no se",
+    "ABV": "4,8",
+    "IBU": "Bajo",
+    "provider": "Bavaria",
     "price": 2000,
-    "quantity": 200
+    "quantity": 100
   }
 ]
