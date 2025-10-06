@@ -37,7 +37,7 @@ El proyecto combina una interfaz gráfica intuitiva con persistencia de datos, o
 
 ---
 
-## ⚙️ Instalación y ejecución
+## Instalación y ejecución
 
 1. **Clona el repositorio**
    ```bash
