@@ -1,47 +1,25 @@
 <XML version= "1.0" encoding ="UTF-8"> 
 
 <Beer>
-	<SerialNumbre>1</SerialNumbre>
-	<Brand>Poker</Brand>
-	<Type>Large</Type>
-	<ABV>4,8</ABV>
-	<IBU>Bajo</IBU>
-	<Provider>Bavaria</Provider>
-	<Price>2000</Price>
-	<Quantity>100</Quantity> 
-
-</Beer>
-<Beer>
-	<SerialNumbre>2</SerialNumbre>
+	<SerialNumbre>3</SerialNumbre>
 	<Brand>Aguila</Brand>
 	<Type>Large</Type>
-	<ABV>4,8</ABV>
-	<IBU>Hola</IBU>
-	<Provider>BC</Provider>
+	<ABV>3,8</ABV>
+	<IBU>media</IBU>
+	<Provider>Duitama</Provider>
 	<Price>2000</Price>
-	<Quantity>20</Quantity> 
+	<Quantity>23</Quantity> 
 
 </Beer>
 <Beer>
 	<SerialNumbre>4</SerialNumbre>
-	<Brand>Poker</Brand>
-	<Type>Large</Type>
-	<ABV>Hola</ABV>
-	<IBU>muy baja</IBU>
-	<Provider>hola</Provider>
-	<Price>2000</Price>
-	<Quantity>10</Quantity> 
-
-</Beer>
-<Beer>
-	<SerialNumbre>5</SerialNumbre>
-	<Brand>Poker</Brand>
-	<Type>Large</Type>
-	<ABV>4,8</ABV>
-	<IBU>Bajo</IBU>
+	<Brand>Corona</Brand>
+	<Type>Stout</Type>
+	<ABV>4</ABV>
+	<IBU>media</IBU>
 	<Provider>Bavaria</Provider>
-	<Price>2000</Price>
-	<Quantity>100</Quantity> 
+	<Price>3000</Price>
+	<Quantity>5</Quantity> 
 
 </Beer>
 </XML>

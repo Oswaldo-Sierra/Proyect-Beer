@@ -1,42 +1,22 @@
 [
   {
-    "serialNumber": 1,
-    "brand": "Poker",
-    "type": "Large",
-    "ABV": "4,8",
-    "IBU": "Bajo",
-    "provider": "Bavaria",
-    "price": 2000,
-    "quantity": 100
-  },
-  {
-    "serialNumber": 2,
+    "serialNumber": 3,
     "brand": "Aguila",
     "type": "Large",
-    "ABV": "4,8",
-    "IBU": "Hola",
-    "provider": "BC",
+    "ABV": "3,8",
+    "IBU": "media",
+    "provider": "Duitama",
     "price": 2000,
-    "quantity": 20
+    "quantity": 23
   },
   {
     "serialNumber": 4,
-    "brand": "Poker",
-    "type": "Large",
-    "ABV": "Hola",
-    "IBU": "muy baja",
-    "provider": "hola",
-    "price": 2000,
-    "quantity": 10
-  },
-  {
-    "serialNumber": 5,
-    "brand": "Poker",
-    "type": "Large",
-    "ABV": "4,8",
-    "IBU": "Bajo",
+    "brand": "Corona",
+    "type": "Stout",
+    "ABV": "4",
+    "IBU": "media",
     "provider": "Bavaria",
-    "price": 2000,
-    "quantity": 100
+    "price": 3000,
+    "quantity": 5
   }
 ]

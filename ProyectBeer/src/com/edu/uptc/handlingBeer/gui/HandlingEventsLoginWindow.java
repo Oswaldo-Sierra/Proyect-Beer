@@ -139,7 +139,13 @@ public class HandlingEventsLoginWindow implements ActionListener {
 		}
 
 		if (!newPassword.equals(confirmNewPassword)) {
-			showError(this.loginWindow.getPanelRightSignuUpWindow().getLblMessageError(), "La contraseña no coincide.");
+			showError(this.loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError(), "La contraseña no coincide.");
+			return;
+		}
+		
+		if (Boolean.FALSE.equals(persistenceUser.findUserByUsername(username))) {
+			showError(this.loginWindow.getPanelRightRecoverPasswordWindow().getLblMessageError(),
+					"El usuario no se encuentra registrado.");
 			return;
 		}
 

@@ -15,14 +15,14 @@ public class MainWindow extends JFrame {
 	private PanelNorthMainWindow panelNorthMainWindow;
 	private PanelMiddleMainWindow panelMiddleMainWindow;
 	private PanelSouthMainWindow panelSouthMainWindow;
-	private PanelRightButtonMainWindow panelRightButtonMainWindow;
-
+	private PanelRightButtonMainWindow panelRightButtonMainWindow;  
 	/** Definimos pantalla auxiliar */
 	private AddBeerWindow addBeerWindow;
 	private AddSalesOfBeerWindow addSalesOfBeerWindow;
 	private ShowBeerbyBrandWindow showBeerbyBrandWindow;
 	private FindBeerWindow findBeerWindow;
 	private ChangeUserComponents changeUserComponents;
+	private ReportsWindow reportsWindow;
 
 	/* Clase que va a manejar los eventos de todos los paneles */
 	private HandlingEventsMainWindow handlingEventsMainWindow;
@@ -62,6 +62,7 @@ public class MainWindow extends JFrame {
 
 	/** Metodo que inicializa los comoponentes. */
 	private void initializeComponents() {
+		
 		this.handlingEventsMainWindow = new HandlingEventsMainWindow(this);
 		this.handlingKeyEventsMainWindow = new HandlingKeyEventsMainWindow(this);
 		this.handlingPersistenceBeer = new HandlingPersistenceBeer();
@@ -81,6 +82,7 @@ public class MainWindow extends JFrame {
 		this.addSalesOfBeerWindow = new AddSalesOfBeerWindow(this);
 		this.showBeerbyBrandWindow = new ShowBeerbyBrandWindow(this);
 		this.findBeerWindow = new FindBeerWindow(this);
+		this.reportsWindow = new ReportsWindow(this);
 	}
 
 	public OptionsBar getOptionsBar() {
@@ -195,6 +197,16 @@ public class MainWindow extends JFrame {
 
 	public void setHandlingKeyEventsMainWindow(HandlingKeyEventsMainWindow handlingKeyEventsMainWindow) {
 		this.handlingKeyEventsMainWindow = handlingKeyEventsMainWindow;
+	}
+	
+	
+
+	public ReportsWindow getReportsWindow() {
+		return reportsWindow;
+	}
+
+	public void setReportsWindow(ReportsWindow reportsWindow) {
+		this.reportsWindow = reportsWindow;
 	}
 
 	public static void main(String[] args) {

@@ -45,6 +45,9 @@ public class OptionsBar extends JMenuBar {
 	private JMenuItem optExportJSON;
 	private JMenuItem optExportXML;
 	private JMenuItem optExportSER;
+	
+	/** Reportes */
+	private JMenuItem optReportBeer;
 
 	private EAplicationMode aplicationMode = EAplicationMode.BEER_MANAGEMENT;
 	private MainWindow mainWindow;
@@ -70,7 +73,7 @@ public class OptionsBar extends JMenuBar {
 		this.optBeerAdministrator.add(optDisplayBeerTable);
 		this.optBeerAdministrator.add(optFindBeerByBrand);
 		// Se añade un nuevo menu y submenu
-
+		this.optReport.add(optReportBeer);
 		// Se añade un nuevo menu y submenu
 
 		this.add(optUserAdministrator);
@@ -333,6 +336,10 @@ public class OptionsBar extends JMenuBar {
 	private void initializeComponentsMenu4() {
 		this.optReport = new JMenu("Informes");
 		this.optReport.setIcon(new ImageIcon("resources/img/icons/reports.png"));
+		
+		this.optReportBeer = new JMenuItem("Ver reportes de cerveza");
+		this.optReportBeer.setActionCommand(HandlingEventsMainWindow.SHOW_REPORTS);
+		this.optReportBeer.addActionListener(this.mainWindow.getHandlingEventsMainWindow());
 	}
 
 	private void setUpScreen() {

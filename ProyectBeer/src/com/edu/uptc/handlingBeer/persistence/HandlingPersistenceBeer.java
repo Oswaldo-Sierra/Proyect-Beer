@@ -335,6 +335,7 @@ public class HandlingPersistenceBeer extends FilePlain implements IActionsFile {
 		return IBU;
 
 	}
+	
 
 	public int generateSerialNumber() {
 		int lastSerial = 0;

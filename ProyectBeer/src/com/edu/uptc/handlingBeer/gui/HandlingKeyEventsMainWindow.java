@@ -40,15 +40,29 @@ public class HandlingKeyEventsMainWindow {
 					}
 				});
 
-		registerAction(component, "LOAD_MODE_XML", KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK),
+		registerAction(component, "LOAD_MODE_XML",
+				KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK | KeyEvent.SHIFT_DOWN_MASK),
 				new AbstractAction() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						System.out.println("XML presionado");
 						pendingLoadMode = "XML";
 						startCancelTimer();
 					}
 				});
 
+		// Exportar información (Ctrl+U+1)
+				registerAction(component, "EXPORT_OBJECT_1", KeyStroke.getKeyStroke(KeyEvent.VK_U, KeyEvent.CTRL_DOWN_MASK),
+						new AbstractAction() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								pendingLoadMode = "Export";
+								startCancelTimer();
+//								mainWindow.getHandlingEventsMainWindow().actionPerformed(new ActionEvent(mainWindow,
+//										ActionEvent.ACTION_PERFORMED, HandlingEventsMainWindow.EXPORT_SALE_CSV));
+							}
+						});
+				
 		// ====== Selección del objeto destino (1 o 2) ======
 		registerAction(component, "SELECT_OBJECT_1", KeyStroke.getKeyStroke(KeyEvent.VK_1, 0), new AbstractAction() {
 			@Override
@@ -64,15 +78,7 @@ public class HandlingKeyEventsMainWindow {
 			}
 		});
 
-		// ====== Exportar información (Ctrl+U+1) ======
-		registerAction(component, "EXPORT_OBJECT_1", KeyStroke.getKeyStroke(KeyEvent.VK_U, KeyEvent.CTRL_DOWN_MASK),
-				new AbstractAction() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						mainWindow.getHandlingEventsMainWindow().actionPerformed(new ActionEvent(mainWindow,
-								ActionEvent.ACTION_PERFORMED, HandlingEventsMainWindow.EXPORT_SALE_CSV));
-					}
-				});
+		
 	}
 
 	/**
@@ -84,6 +90,7 @@ public class HandlingKeyEventsMainWindow {
 			return;
 		}
 
+		System.out.println(pendingLoadMode);
 		String actionCommand = null;
 		switch (pendingLoadMode) {
 		case "PLAIN":
@@ -113,6 +120,16 @@ public class HandlingKeyEventsMainWindow {
 				actionCommand = HandlingEventsMainWindow.LOAD_SALE_XML;
 			}
 			break;
+		case "Export":
+			if (objectIndex == 1) {
+				this.mainWindow.getHandlingEventsMainWindow().switchToMode(EAplicationMode.BEER_MANAGEMENT);
+				actionCommand = HandlingEventsMainWindow.EXPORT_BEER_CSV;
+			} else {
+				this.mainWindow.getHandlingEventsMainWindow().switchToMode(EAplicationMode.SALES_MANAGEMENT);
+				actionCommand = HandlingEventsMainWindow.EXPORT_SALE_CSV;
+			}
+			break;
+			
 		}
 
 		if (actionCommand != null) {
@@ -124,7 +141,6 @@ public class HandlingKeyEventsMainWindow {
 		pendingLoadMode = null;
 	}
 
-	
 	/**
 	 * Registra una acción personalizada
 	 */
@@ -132,15 +148,15 @@ public class HandlingKeyEventsMainWindow {
 		component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, name);
 		component.getActionMap().put(name, action);
 	}
-	
+
 	/**
-	 * Temporizador en caso de que no se precione la combinacion un 1s 
-	 * */
+	 * Temporizador en caso de que no se precione la combinacion un 1s
+	 */
 	private void startCancelTimer() {
 		if (cancelTimer != null) {
 			cancelTimer.stop();
 		}
-		cancelTimer = new Timer(1000, e -> {
+		cancelTimer = new Timer(3000, e -> {
 			pendingLoadMode = null;
 
 		});

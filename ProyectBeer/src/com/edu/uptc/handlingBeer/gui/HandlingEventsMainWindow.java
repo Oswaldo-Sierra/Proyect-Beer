@@ -85,6 +85,8 @@ public class HandlingEventsMainWindow implements ActionListener {
 	public static final String CHANGE_PASSWORD = "CHANGE_PASSWORD";
 	public static final String DELETE_ACCOUNT = "DELETE_ACCOUNT";
 	public static final String LOG_OUT = "LOG_OUT";
+	public static final String SHOW_REPORTS = "SHOW_REPORTS";
+
 	private boolean ascendingOrder = true;
 
 	private EAplicationMode aplicationMode = EAplicationMode.BEER_MANAGEMENT;
@@ -259,7 +261,37 @@ public class HandlingEventsMainWindow implements ActionListener {
 		case LOG_OUT:
 			this.handlingEventsUser.logOut();
 			break;
+
+		// reportes
+		case SHOW_REPORTS:
+			this.addBrands();
+			break;
 		}
+
+	}
+
+	private void addBrands() {
+
+		Long contPoker = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Poker")).count();
+		Long contAguila = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Aguila")).count();
+		Long contCosteña = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Costeña")).count();
+		Long contCorona = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Corona")).count();
+		Long contGuinnes = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Guinness")).count();
+		Long contBudweiser = this.mainWindow.getHandlingPersistenceBeer().getListBeer().stream()
+				.filter(b -> b.getBrand().contentEquals("Budweiser")).count();
+
+		this.mainWindow.getReportsWindow().getDataset().setValue("Poker", contPoker);
+		this.mainWindow.getReportsWindow().getDataset().setValue("Aguila", contAguila);
+		this.mainWindow.getReportsWindow().getDataset().setValue("Costeña", contCosteña);
+		this.mainWindow.getReportsWindow().getDataset().setValue("Corona", contCorona);
+		this.mainWindow.getReportsWindow().getDataset().setValue("Guinnes", contGuinnes);
+		this.mainWindow.getReportsWindow().getDataset().setValue("Budweiser", contBudweiser);
+		this.mainWindow.getReportsWindow().setVisible(true);
 
 	}
 
@@ -286,9 +318,9 @@ public class HandlingEventsMainWindow implements ActionListener {
 		List<SalesOfBeer> sales = this.mainWindow.getHandlingPersistenceSalesOfBeer().getListSalesOfBeer();
 
 		if (ascendingOrder) {
-			sales.sort((s1, s2) -> s1.getSalesID() -s2.getSalesID());
+			sales.sort((s1, s2) -> s1.getSalesID() - s2.getSalesID());
 		} else {
-			sales.sort((s1, s2) -> s2.getSalesID() -s1.getSalesID());
+			sales.sort((s1, s2) -> s2.getSalesID() - s1.getSalesID());
 		}
 
 		this.clearTable();
@@ -301,8 +333,6 @@ public class HandlingEventsMainWindow implements ActionListener {
 		});
 		ascendingOrder = false;
 	}
-	
-
 
 	private void findSalesbyAtribute() {
 		int index = mainWindow.getFindBeerWindow().getComboBoxAttributes().getSelectedIndex();
@@ -344,7 +374,7 @@ public class HandlingEventsMainWindow implements ActionListener {
 		this.mainWindow.getOptionsBar().updateForMode(mode);
 
 		this.mainWindow.getFindBeerWindow().updateForMode(mode);
-		
+
 		this.mainWindow.getPanelSouthMainWindow().updateForMode(mode);
 
 		this.mainWindow.getPanelRightButtonMainWindow().setVisible(false);
